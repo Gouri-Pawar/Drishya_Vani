@@ -13,7 +13,7 @@
         <!-- Header -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="300dp"
             android:orientation="vertical"
             android:gravity="center"
             android:background="@drawable/header_gradient">
@@ -21,7 +21,7 @@
             <ImageView
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:src="@drawable/ic_launcher_foreground"
+                android:src="@drawable/logo"
                 android:layout_marginBottom="10dp"/>
 
             <TextView
@@ -29,6 +29,7 @@
                 android:layout_height="wrap_content"
                 android:text="Select Language"
                 android:textColor="#FFFFFF"
+                android:layout_marginTop="20dp"
                 android:textSize="26sp"
                 android:textStyle="bold"/>
 
@@ -37,8 +38,8 @@
         <!-- Language Buttons -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_height="430dp"
+            android:backgroundTint="@color/white"
             android:orientation="vertical"
             android:padding="24dp">
 
@@ -46,8 +47,9 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="65dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="30dp"
                 app:cardCornerRadius="18dp"
+                android:layout_marginTop="60dp"
                 app:cardElevation="6dp">
 
                 <Button
@@ -64,7 +66,7 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="65dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="30dp"
                 app:cardCornerRadius="18dp"
                 app:cardElevation="6dp">
 
