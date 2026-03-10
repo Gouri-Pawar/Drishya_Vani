@@ -1,33 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context=".JourneyActivity">
+    android:fillViewport="true">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fitsSystemWindows="true">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="20dp">
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar"
+        <!-- Location Status -->
+
+        <TextView
+            android:id="@+id/txtLocationStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Detecting location..."
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="20dp"/>
+
+
+        <!-- Landmark Image -->
+
+        <ImageView
+            android:id="@+id/imgLandmark"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize" />
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img"
+            android:layout_marginBottom="20dp"/>
 
-    </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_journey" />
+        <!-- Landmark Name -->
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_marginEnd="@dimen/fab_margin"
-        android:layout_marginBottom="16dp"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        <TextView
+            android:id="@+id/txtLandmarkName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Landmark Name"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="10dp"/>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+        <!-- Landmark Description -->
+
+        <TextView
+            android:id="@+id/txtDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Landmark description will appear here."
+            android:textSize="16sp"
+            android:layout_marginBottom="25dp"/>
+
+
+        <!-- Play Story Button -->
+
+        <Button
+            android:id="@+id/btnPlayStory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Play Audio Story"
+            android:textSize="16sp"/>
+
+
+    </LinearLayout>
+
+</ScrollView>
