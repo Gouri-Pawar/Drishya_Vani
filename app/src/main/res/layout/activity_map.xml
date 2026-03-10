@@ -1,10 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MapActivity">
+    android:background="#F5F5F5"
+    android:padding="16dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- Title -->
+    <TextView
+        android:id="@+id/txtMapTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your Location"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#1E88E5"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"/>
+
+    <!-- Map Icon -->
+    <ImageView
+        android:id="@+id/imgMapIcon"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_below="@id/txtMapTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/ic_map_location"
+        android:contentDescription="Map Icon" />
+
+    <!-- Access Location Button -->
+    <Button
+        android:id="@+id/btnAccessLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="Access Your Location"
+        android:textColor="#FFFFFF"
+        android:layout_below="@id/imgMapIcon"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="17dp"
+        android:paddingStart="32dp"
+        android:paddingEnd="32dp"
+        android:background="@drawable/rounded_button"/>
+
+    <!-- Google Maps placeholder square -->
+    <ImageView
+        android:id="@+id/imgMapPlaceholder"
+        android:layout_width="match_parent"
+        android:layout_height="410dp"
+        android:layout_below="@id/btnAccessLocation"
+        android:layout_marginTop="24dp"
+        android:background="#E0E0E0"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_launcher_background"
+        android:contentDescription="Map Placeholder"
+        android:clickable="true"
+        android:focusable="true"/>
+
+    <!-- Info Text -->
+    <TextView
+        android:id="@+id/txtMapInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your current location will display here."
+        android:textSize="14sp"
+        android:textColor="#9E9E9E"
+        android:layout_below="@id/imgMapPlaceholder"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"/>
+
+</RelativeLayout>
