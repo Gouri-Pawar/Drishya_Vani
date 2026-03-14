@@ -14,9 +14,15 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.DocumentSnapshot;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -56,9 +62,11 @@ public class JourneyActivity extends AppCompatActivity {
     String storyMarathi = "";
 
     // Unsplash Access Key
-    String UNSPLASH_ACCESS_KEY = "YOUR_UNSPLASH_ACCESS_KEY";
+    String UNSPLASH_ACCESS_KEY = "HMmvQNEDOX94h3uO7YWMI0ycCZPWcv-nFqhMYtMSbZU";
 
     boolean isSpeaking = false;
+
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +92,8 @@ public class JourneyActivity extends AppCompatActivity {
                 else if (selectedLanguage.equals("mr")) locale = new Locale("mr", "IN");
                 else locale = Locale.ENGLISH;
                 tts.setLanguage(locale);
+                tts.setPitch(1.4f); // higher = sharper voice
+                tts.setSpeechRate(1.2f); // normal
             }
         });
 
@@ -188,7 +198,7 @@ public class JourneyActivity extends AppCompatActivity {
                 // Limit to 10 sentences
                 String[] sentences = description.split("\\. ");
                 StringBuilder shortDescription = new StringBuilder();
-                for (int i = 0; i < Math.min(sentences.length, 10); i++) {
+                for (int i = 0; i < Math.min(sentences.length, 15); i++) {
                     shortDescription.append(sentences[i]).append(". ");
                 }
                 description = shortDescription.toString().trim();
@@ -196,23 +206,37 @@ public class JourneyActivity extends AppCompatActivity {
 
                 // Unsplash image
                 String imageUrl = "";
+
                 try {
-                    String unsplashQuery = query.replace("_", "+");
-                    String unsplashUrl = "https://api.unsplash.com/search/photos?query=" + unsplashQuery
-                            + "&client_id=" + UNSPLASH_ACCESS_KEY + "&per_page=1";
-                    HttpURLConnection imgConn = (HttpURLConnection) new URL(unsplashUrl).openConnection();
-                    imgConn.setConnectTimeout(5000);
-                    imgConn.setReadTimeout(5000);
+
+                    String unsplashQuery = city + " city";
+
+                    String unsplashUrl =
+                            "https://api.unsplash.com/search/photos?query="
+                                    + URLEncoder.encode(unsplashQuery, "UTF-8")
+                                    + "&per_page=1";
+
+                    HttpURLConnection imgConn =
+                            (HttpURLConnection) new URL(unsplashUrl).openConnection();
+
+                    imgConn.setRequestProperty("Authorization", "Client-ID " + UNSPLASH_ACCESS_KEY);
+
                     InputStream imgStream = imgConn.getInputStream();
-                    Scanner imgScanner = new Scanner(imgStream).useDelimiter("\\A");
-                    String imgResponse = imgScanner.hasNext() ? imgScanner.next() : "";
-                    JSONObject imgJson = new JSONObject(imgResponse);
-                    JSONArray results = imgJson.optJSONArray("results");
-                    if (results != null && results.length() > 0) {
-                        imageUrl = results.getJSONObject(0).getJSONObject("urls").getString("regular");
+
+                    Scanner scanner = new Scanner(imgStream).useDelimiter("\\A");
+                    String imgResponse = scanner.hasNext() ? scanner.next() : "";
+
+                    JSONObject json = new JSONObject(imgResponse);
+                    JSONArray results = json.getJSONArray("results");
+
+                    if(results.length() > 0){
+                        imageUrl = results.getJSONObject(0)
+                                .getJSONObject("urls")
+                                .getString("regular");
                     }
-                } catch (Exception e) {
-                    imageUrl = "https://via.placeholder.com/600x300.png?text=No+Image";
+
+                }catch(Exception e){
+                    e.printStackTrace();
                 }
 
                 String finalDescription = description;
@@ -221,11 +245,13 @@ public class JourneyActivity extends AppCompatActivity {
                 runOnUiThread(() -> {
                     txtDescription.setText(finalDescription);
 
-                    // Picasso with placeholder and error drawable
+                    // SAVE TO FIREBASE
+                    savePlaceToFirebase(city, finalDescription);
+
                     Picasso.get()
-                            .load(finalImageUrl.isEmpty() ? null : finalImageUrl) // If empty, triggers error()
-                            .placeholder(R.drawable.landmark_placeholder) // while loading
-                            .error(R.drawable.landmark_placeholder) // if load fails
+                            .load(finalImageUrl.isEmpty() ? null : finalImageUrl)
+                            .placeholder(R.drawable.landmark_placeholder)
+                            .error(R.drawable.landmark_placeholder)
                             .into(imgLandmark);
 
                     DownloadConditions conditions = new DownloadConditions.Builder().build();
@@ -247,6 +273,22 @@ public class JourneyActivity extends AppCompatActivity {
                 });
             }
         }).start();
+    }
+
+    private void savePlaceToFirebase(String city, String description) {
+
+        if(city == null || city.isEmpty()) return;
+
+        Map<String, Object> place = new HashMap<>();
+        place.put("name", city);
+        place.put("description", description);
+
+        db.collection("places")
+                .document(city.toLowerCase())   // Document name will be city (example: Pune)
+                .set(place)
+                .addOnSuccessListener(aVoid ->
+                        System.out.println("Place stored successfully"))
+                .addOnFailureListener(Throwable::printStackTrace);
     }
 
     private void toggleSpeech() {

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "213758464651",
+    "project_id": "drishyavani-c0699",
+    "storage_bucket": "drishyavani-c0699.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:213758464651:android:77bcea637bcaf924ddba8e",
+        "android_client_info": {
+          "package_name": "com.example.drishya_vani"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPh_iQVX6YAFcuKylgHOCyozQc28FfzWM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
