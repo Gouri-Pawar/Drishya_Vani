@@ -7,11 +7,16 @@ import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class Splash_Screen extends AppCompatActivity {
 
     private ProgressBar progressBar;
     private int progressStatus = 0;
     private Handler handler = new Handler();
+
+    FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +24,7 @@ public class Splash_Screen extends AppCompatActivity {
         setContentView(R.layout.activity_splash_screen);
 
         progressBar = findViewById(R.id.progressBar);
+        auth = FirebaseAuth.getInstance();
 
         new Thread(() -> {
             while (progressStatus < 100) {
@@ -33,9 +39,25 @@ public class Splash_Screen extends AppCompatActivity {
                 }
             }
 
-            Intent intent = new Intent(Splash_Screen.this, MainActivity.class);
-            startActivity(intent);
-            finish();
+            handler.post(() -> {
+
+                FirebaseUser user = auth.getCurrentUser();
+
+                if (user != null) {
+
+                    // User already logged in
+                    Intent intent = new Intent(Splash_Screen.this, MainActivity.class);
+                    startActivity(intent);
+
+                } else {
+
+                    // New user
+                    Intent intent = new Intent(Splash_Screen.this, LoginActivity.class);
+                    startActivity(intent);
+                }
+
+                finish();
+            });
 
         }).start();
     }

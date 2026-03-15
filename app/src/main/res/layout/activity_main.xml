@@ -41,6 +41,11 @@
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:textSize="30sp"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="logout"
+                android:id="@+id/logout"/>
 
             <TextView
                 android:layout_width="wrap_content"
