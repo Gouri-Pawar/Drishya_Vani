@@ -1,5 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
+    // Firebase plugin
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -45,6 +47,10 @@ dependencies {
     implementation(libs.constraintlayout)
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
+    implementation(libs.annotation)
+    implementation(libs.lifecycle.livedata.ktx)
+    implementation(libs.lifecycle.viewmodel.ktx)
+    implementation(libs.firebase.auth)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
@@ -52,4 +58,9 @@ dependencies {
     implementation("com.google.android.gms:play-services-location:21.0.1")
     implementation("com.google.mlkit:translate:17.0.2")
     implementation("com.squareup.picasso:picasso:2.8")
+
+
+    implementation(platform("com.google.firebase:firebase-bom:34.10.0"))
+
+    implementation("com.google.firebase:firebase-firestore")
 }

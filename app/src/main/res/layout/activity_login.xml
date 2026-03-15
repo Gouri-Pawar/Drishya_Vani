@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/header_gradient"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="130dp"
+        android:layout_gravity="center">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="0dp"
+        android:layout_marginBottom="15dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/logo"
+            android:scaleType="centerCrop"/>
+
+    </androidx.cardview.widget.CardView>
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/uname"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:hint="Enter your gmail"
+        android:textColor="@color/white"
+        android:layout_marginTop="35dp"
+        android:textColorHint="@color/white"
+        android:backgroundTint="@color/white"/>
+
+    <EditText
+        android:id="@+id/pass"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:hint="Enter password"
+        android:textColor="@color/white"
+        android:inputType="textPassword"
+        android:textColorHint="@color/white"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/white"/>
+
+    <TextView
+        android:id="@+id/forgotPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Forgot Password?"
+        android:textColor="@color/light_grey"
+        android:layout_gravity="center"
+        android:layout_marginTop="22dp"/>
+
+    <Button
+        android:id="@+id/login"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:text="Log in"
+        android:backgroundTint="@color/dark_blue"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Didn't Have Account? Sign Up"
+        android:textColor="@color/light_grey"
+        android:layout_gravity="center"
+        android:layout_marginTop="22dp"/>
+
+
+</LinearLayout>
