@@ -21,6 +21,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.DocumentSnapshot;
 
@@ -42,6 +43,9 @@ import java.net.URLEncoder;
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class JourneyActivity extends AppCompatActivity {
 
@@ -78,6 +82,8 @@ public class JourneyActivity extends AppCompatActivity {
         txtDescription = findViewById(R.id.txtDescription);
         imgLandmark = findViewById(R.id.imgLandmark);
         btnPlayStory = findViewById(R.id.btnPlayStory);
+
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
@@ -279,16 +285,20 @@ public class JourneyActivity extends AppCompatActivity {
 
         if(city == null || city.isEmpty()) return;
 
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        String currentDate = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
+                .format(new Date());
+
         Map<String, Object> place = new HashMap<>();
         place.put("name", city);
         place.put("description", description);
+        place.put("date", currentDate);
 
-        db.collection("places")
-                .document(city.toLowerCase())   // Document name will be city (example: Pune)
-                .set(place)
-                .addOnSuccessListener(aVoid ->
-                        System.out.println("Place stored successfully"))
-                .addOnFailureListener(Throwable::printStackTrace);
+        db.collection("users")
+                .document(userId)
+                .collection("visited_places")
+                .add(place);
     }
 
     private void toggleSpeech() {

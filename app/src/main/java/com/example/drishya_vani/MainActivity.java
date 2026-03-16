@@ -2,61 +2,109 @@ package com.example.drishya_vani;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button startJourneyBtn, mapBtn, languageBtn, aboutBtn, logoutBtn;
+    View exploreBtn, mapBtn, languageBtn, aboutBtn, viewPlacesBtn;
+    ImageButton logoutBtn;
+    ImageView logo;
+    TextView usernameText;
+
+    FirebaseAuth auth;
+    FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        startJourneyBtn = findViewById(R.id.startBtn);
+        exploreBtn = findViewById(R.id.startBtn);
         mapBtn = findViewById(R.id.mapBtn);
         languageBtn = findViewById(R.id.langBtn);
         aboutBtn = findViewById(R.id.aboutBtn);
+        viewPlacesBtn = findViewById(R.id.viewPlacesBtn);
+
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
         logoutBtn = findViewById(R.id.logout);
+        logo = findViewById(R.id.logo);
+        usernameText = findViewById(R.id.usernameText);
 
-        // Start Journey
-        startJourneyBtn.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, JourneyActivity.class);
-            startActivity(intent);
+        auth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
+        /* -------- FETCH USER NAME FROM FIRESTORE -------- */
+
+        FirebaseUser user = auth.getCurrentUser();
+
+        if (user != null) {
+
+            String uid = user.getUid();
+
+            db.collection("users")
+                    .document(uid)
+                    .get()
+                    .addOnSuccessListener(documentSnapshot -> {
+
+                        if (documentSnapshot.exists()) {
+
+                            String name = documentSnapshot.getString("name");
+
+                            usernameText.setText("Hello, " + name);
+                        }
+                    });
+        }
+
+        /* -------- LOGO ANIMATION -------- */
+
+        Animation logoAnimation = AnimationUtils.loadAnimation(this, R.anim.logo_animation);
+        logo.startAnimation(logoAnimation);
+
+        /* -------- BUTTON ACTIONS -------- */
+
+        exploreBtn.setOnClickListener(v -> {
+            startActivity(new Intent(MainActivity.this, JourneyActivity.class));
         });
 
-        // Open Map
         mapBtn.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, MapActivity.class);
-            startActivity(intent);
+            startActivity(new Intent(MainActivity.this, MapActivity.class));
         });
 
-        // Language Selection
         languageBtn.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, LanguageSelectionActivity.class);
-            startActivity(intent);
+            startActivity(new Intent(MainActivity.this, LanguageSelectionActivity.class));
         });
 
-        // About
         aboutBtn.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, AboutActivity.class);
-            startActivity(intent);
+            startActivity(new Intent(MainActivity.this, AboutActivity.class));
+        });
+
+        viewPlacesBtn.setOnClickListener(v -> {
+            startActivity(new Intent(MainActivity.this, HistoryActivity.class));
         });
 
         logoutBtn.setOnClickListener(v -> {
-            FirebaseAuth.getInstance().signOut();
+
+            auth.signOut();
 
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             finish();
         });
-
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
     }
 }

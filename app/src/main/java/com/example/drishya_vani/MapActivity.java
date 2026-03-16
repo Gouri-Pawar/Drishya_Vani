@@ -10,25 +10,31 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MapActivity extends AppCompatActivity {
 
+    Button btnAccessLocation;
+    ImageView imgMapPlaceholder;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
 
-        Button btnAccessLocation = findViewById(R.id.btnAccessLocation);
-        ImageView imgMapPlaceholder = findViewById(R.id.imgMapPlaceholder);
+        btnAccessLocation = findViewById(R.id.btnAccessLocation);
+        imgMapPlaceholder = findViewById(R.id.imgMapPlaceholder);
 
         // Open Google Maps when button is clicked
         btnAccessLocation.setOnClickListener(v -> openGoogleMaps());
 
-        // Open Google Maps when placeholder is clicked
-        // imgMapPlaceholder.setOnClickListener(v -> openGoogleMaps());
+        // Optional: open maps when image clicked
+        imgMapPlaceholder.setOnClickListener(v -> openGoogleMaps());
     }
 
     private void openGoogleMaps() {
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse("https://www.google.com"));
-        startActivity(intent);
-        }
 
+        Uri gmmIntentUri = Uri.parse("geo:0,0?q=nearby places");
+
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+        mapIntent.setPackage("com.google.android.apps.maps");
+
+        startActivity(mapIntent);
     }
+}
