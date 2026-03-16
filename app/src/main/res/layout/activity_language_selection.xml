@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    android:background="#E3F2FD">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,38 +20,44 @@
             android:background="@drawable/header_gradient">
 
             <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="85dp"
+                android:layout_height="85dp"
                 android:src="@drawable/logo"
-                android:layout_marginBottom="10dp"/>
+                android:layout_marginBottom="12dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Select Language"
                 android:textColor="#FFFFFF"
-                android:layout_marginTop="20dp"
                 android:textSize="26sp"
                 android:textStyle="bold"/>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Choose your preferred language for the guide"
+                android:textColor="#E3F2FD"
+                android:textSize="14sp"
+                android:layout_marginTop="6dp"/>
+
         </LinearLayout>
 
-        <!-- Language Buttons -->
+        <!-- Language Section -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="430dp"
-            android:backgroundTint="@color/white"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="24dp">
+            android:padding="24dp"
+            android:layout_marginTop="70dp">
 
             <!-- English -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="65dp"
                 android:layout_marginBottom="30dp"
-                app:cardCornerRadius="18dp"
-                android:layout_marginTop="60dp"
-                app:cardElevation="6dp">
+                app:cardCornerRadius="20dp"
+                app:cardElevation="8dp">
 
                 <Button
                     android:id="@+id/englishBtn"
@@ -58,8 +65,9 @@
                     android:layout_height="match_parent"
                     android:text="🇬🇧 English"
                     android:textSize="18sp"
+                    android:textStyle="bold"
                     android:textColor="#FFFFFF"
-                    android:backgroundTint="#1565C0"/>
+                    android:backgroundTint="#1976D2"/>
             </androidx.cardview.widget.CardView>
 
             <!-- Hindi -->
@@ -67,8 +75,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="65dp"
                 android:layout_marginBottom="30dp"
-                app:cardCornerRadius="18dp"
-                app:cardElevation="6dp">
+                app:cardCornerRadius="20dp"
+                app:cardElevation="8dp">
 
                 <Button
                     android:id="@+id/hindiBtn"
@@ -76,16 +84,17 @@
                     android:layout_height="match_parent"
                     android:text="🇮🇳 Hindi"
                     android:textSize="18sp"
+                    android:textStyle="bold"
                     android:textColor="#FFFFFF"
-                    android:backgroundTint="#26A69A"/>
+                    android:backgroundTint="#0D47A1"/>
             </androidx.cardview.widget.CardView>
 
             <!-- Marathi -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="65dp"
-                app:cardCornerRadius="18dp"
-                app:cardElevation="6dp">
+                app:cardCornerRadius="20dp"
+                app:cardElevation="8dp">
 
                 <Button
                     android:id="@+id/marathiBtn"
@@ -93,8 +102,9 @@
                     android:layout_height="match_parent"
                     android:text="🇮🇳 Marathi"
                     android:textSize="18sp"
+                    android:textStyle="bold"
                     android:textColor="#FFFFFF"
-                    android:backgroundTint="#7E57C2"/>
+                    android:backgroundTint="#1976D2"/>
             </androidx.cardview.widget.CardView>
 
         </LinearLayout>

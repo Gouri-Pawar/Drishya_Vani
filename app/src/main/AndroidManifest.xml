@@ -17,6 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Drishya_Vani">
         <activity
+            android:name=".HistoryActivity"
+            android:exported="false" />
+        <activity
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
