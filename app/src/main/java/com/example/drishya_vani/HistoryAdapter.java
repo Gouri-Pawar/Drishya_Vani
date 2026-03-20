@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHolder> {
 
@@ -36,9 +38,30 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
         PlaceModel place = placeList.get(position);
 
-        holder.placeName.setText(place.getName());
-        holder.placeLocation.setText(place.getDescription());
-        holder.placeDate.setText(place.getDate());
+        // 📍 Place Name
+        holder.placeName.setText("📍 " + place.getName());
+
+        List<String> visits = place.getVisits();
+
+        if (visits != null && !visits.isEmpty()) {
+
+            // Copy list to avoid modifying original
+            List<String> sortedVisits = new ArrayList<>(visits);
+
+            // Show latest first
+            Collections.reverse(sortedVisits);
+
+            StringBuilder visitText = new StringBuilder();
+
+            for (String date : sortedVisits) {
+                visitText.append("Visited on: ").append(date).append("\n");
+            }
+
+            holder.placeVisits.setText(visitText.toString().trim());
+
+        } else {
+            holder.placeVisits.setText("No visits yet");
+        }
     }
 
     @Override
@@ -48,16 +71,13 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView placeName;
-        TextView placeLocation;
-        TextView placeDate;
+        TextView placeName, placeVisits;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             placeName = itemView.findViewById(R.id.placeName);
-            placeLocation = itemView.findViewById(R.id.placeLocation);
-            placeDate = itemView.findViewById(R.id.placeDate);
+            placeVisits = itemView.findViewById(R.id.placeVisits);
         }
     }
 }

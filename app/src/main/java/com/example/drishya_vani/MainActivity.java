@@ -18,7 +18,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MainActivity extends AppCompatActivity {
 
-    View exploreBtn, mapBtn, languageBtn, aboutBtn, viewPlacesBtn;
+    View exploreBtn, mapBtn, languageBtn, aboutBtn, viewPlacesBtn, nearbyBtn;
     ImageButton logoutBtn;
     ImageView logo;
     TextView usernameText;
@@ -36,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
         languageBtn = findViewById(R.id.langBtn);
         aboutBtn = findViewById(R.id.aboutBtn);
         viewPlacesBtn = findViewById(R.id.viewPlacesBtn);
+        nearbyBtn = findViewById(R.id.nearbyBtn);
+
 
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
@@ -95,6 +97,10 @@ public class MainActivity extends AppCompatActivity {
 
         viewPlacesBtn.setOnClickListener(v -> {
             startActivity(new Intent(MainActivity.this, HistoryActivity.class));
+        });
+
+        nearbyBtn.setOnClickListener(v -> {
+            startActivity(new Intent(MainActivity.this, NearbyPlaces.class));
         });
 
         logoutBtn.setOnClickListener(v -> {

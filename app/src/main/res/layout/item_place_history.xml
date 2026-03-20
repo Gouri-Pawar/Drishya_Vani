@@ -30,7 +30,6 @@
             android:layout_weight="1"
             android:orientation="vertical"
             android:layout_marginStart="10dp">
-
             <TextView
                 android:id="@+id/placeName"
                 android:layout_width="wrap_content"
@@ -38,23 +37,16 @@
                 android:text="Place Name"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:textColor="#111827"/>
+                android:textColor="#0D47A1"/>
 
             <TextView
-                android:id="@+id/placeLocation"
+                android:id="@+id/placeVisits"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="City, Country"
+                android:text="Visited on: 22 Mar 2026"
                 android:textSize="14sp"
-                android:textColor="#6B7280"/>
-
-            <TextView
-                android:id="@+id/placeDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Visited on: 12 Mar 2026"
-                android:textSize="12sp"
-                android:textColor="#9CA3AF"/>
+                android:textColor="#424242"
+                android:layout_marginTop="6dp"/>
 
         </LinearLayout>
 

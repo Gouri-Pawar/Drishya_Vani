@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,6 +23,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.DocumentSnapshot;
 
@@ -210,22 +213,30 @@ public class JourneyActivity extends AppCompatActivity {
                 description = shortDescription.toString().trim();
                 storyEnglish = description;
 
-                // Unsplash image
                 String imageUrl = "";
 
                 try {
 
-                    String unsplashQuery = city + " city";
+                    // Priority: Place → City
+                    String searchQuery;
+
+                    if (place != null && !place.isEmpty()) {
+                        searchQuery = place + " " + city;   // e.g. "Shivaji Nagar Pune"
+                    } else {
+                        searchQuery = city;                 // fallback
+                    }
 
                     String unsplashUrl =
                             "https://api.unsplash.com/search/photos?query="
-                                    + URLEncoder.encode(unsplashQuery, "UTF-8")
-                                    + "&per_page=1";
+                                    + URLEncoder.encode(searchQuery, "UTF-8")
+                                    + "&orientation=landscape&per_page=1";
 
                     HttpURLConnection imgConn =
                             (HttpURLConnection) new URL(unsplashUrl).openConnection();
 
                     imgConn.setRequestProperty("Authorization", "Client-ID " + UNSPLASH_ACCESS_KEY);
+                    imgConn.setConnectTimeout(5000);
+                    imgConn.setReadTimeout(5000);
 
                     InputStream imgStream = imgConn.getInputStream();
 
@@ -235,13 +246,17 @@ public class JourneyActivity extends AppCompatActivity {
                     JSONObject json = new JSONObject(imgResponse);
                     JSONArray results = json.getJSONArray("results");
 
-                    if(results.length() > 0){
-                        imageUrl = results.getJSONObject(0)
-                                .getJSONObject("urls")
-                                .getString("regular");
+                    if (results.length() > 0) {
+
+                        JSONObject photo = results.getJSONObject(0);
+
+                        // Try better quality fields
+                        if (photo.has("urls")) {
+                            imageUrl = photo.getJSONObject("urls").getString("regular");
+                        }
                     }
 
-                }catch(Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 
@@ -290,15 +305,25 @@ public class JourneyActivity extends AppCompatActivity {
         String currentDate = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
                 .format(new Date());
 
-        Map<String, Object> place = new HashMap<>();
-        place.put("name", city);
-        place.put("description", description);
-        place.put("date", currentDate);
-
-        db.collection("users")
+        DocumentReference docRef = db.collection("users")
                 .document(userId)
                 .collection("visited_places")
-                .add(place);
+                .document(city.toLowerCase());
+
+        docRef.get().addOnSuccessListener(documentSnapshot -> {
+
+            if (documentSnapshot.exists()) {
+                // Add new visit date
+                docRef.update("visits", FieldValue.arrayUnion(currentDate));
+            } else {
+                // First time visit
+                Map<String, Object> place = new HashMap<>();
+                place.put("name", city);
+                place.put("visits", Arrays.asList(currentDate));
+
+                docRef.set(place);
+            }
+        });
     }
 
     private void toggleSpeech() {
