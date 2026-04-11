@@ -7,10 +7,11 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 public class LanguageSelectionActivity extends AppCompatActivity {
 
-    Button englishBtn, hindiBtn, marathiBtn;
+    CardView englishBtn, hindiBtn, marathiBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

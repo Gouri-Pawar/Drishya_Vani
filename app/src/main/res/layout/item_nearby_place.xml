@@ -25,6 +25,7 @@
             android:background="#1565C0" />
 
         <!-- Place icon badge -->
+        <!-- Place icon badge — replace the inner ImageView with TextView -->
         <androidx.cardview.widget.CardView
             android:layout_width="44dp"
             android:layout_height="44dp"
@@ -33,15 +34,14 @@
             app:cardElevation="0dp"
             app:cardBackgroundColor="#EAF0FF">
 
-            <ImageView
-                android:id="@+id/imgPlaceIcon"
+            <TextView
+                android:id="@+id/txtPlaceEmoji"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/ic_map_location"
-                android:padding="10dp"
-                android:scaleType="centerInside"
-                android:contentDescription="Place icon"
-                app:tint="#1565C0" />
+                android:text="📍"
+                android:textSize="22sp"
+                android:gravity="center"
+                android:contentDescription="Place icon" />
 
         </androidx.cardview.widget.CardView>
 
@@ -65,12 +65,30 @@
                 android:maxLines="1"
                 android:ellipsize="end" />
 
+            <!-- Type pill badge -->
+            <TextView
+                android:id="@+id/txtPlaceType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tourism"
+                android:textSize="10sp"
+                android:textColor="#1565C0"
+                android:textAllCaps="true"
+                android:letterSpacing="0.05"
+                android:paddingStart="7dp"
+                android:paddingEnd="7dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/bg_type_pill" />
+
+            <!-- Distance row -->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:layout_marginTop="4dp">
+                android:layout_marginTop="5dp">
 
                 <ImageView
                     android:layout_width="11dp"

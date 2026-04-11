@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1565C0"
+    android:fillViewport="true">
+
+    <!-- Soft radial gradient overlay using a layered background -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="36dp"
+        android:background="@drawable/bg_add_contacts">
+
+        <!-- Header Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="52dp"
+            android:layout_marginBottom="28dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Emergency Contacts"
+                    android:textSize="26sp"
+                    android:textStyle="bold"
+                    android:letterSpacing="0.02"
+                    android:textColor="#FFFFFF"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Add up to 3 trusted contacts"
+                    android:textSize="13sp"
+                    android:textColor="#BBDEFB"
+                    android:layout_marginTop="4dp"/>
+            </LinearLayout>
+
+            <!-- Shield icon badge -->
+            <TextView
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:text="🚨"
+                android:textSize="28sp"
+                android:gravity="center"
+                android:background="@drawable/bg_icon_circle_white"
+                android:padding="8dp"/>
+
+        </LinearLayout>
+
+        <!-- Contact 1 -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="8dp"
+            app:cardBackgroundColor="#FFFFFF"
+            android:layout_marginBottom="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <!-- Label row -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="14dp">
+
+                    <TextView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:text="1"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:background="@drawable/bg_circle_blue"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Contact 1"
+                        android:textColor="#1565C0"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.05"
+                        android:layout_marginStart="10dp"/>
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/name1"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:hint="Full Name"
+                    android:textColor="#1A1A2E"
+                    android:textColorHint="#90A4AE"
+                    android:textSize="15sp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:background="@drawable/input_bg_light"
+                    android:layout_marginBottom="10dp"/>
+
+                <EditText
+                    android:id="@+id/phone1"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:hint="Phone Number"
+                    android:textColor="#1A1A2E"
+                    android:textColorHint="#90A4AE"
+                    android:textSize="15sp"
+                    android:inputType="phone"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:background="@drawable/input_bg_light"/>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Contact 2 -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="8dp"
+            app:cardBackgroundColor="#FFFFFF"
+            android:layout_marginBottom="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="14dp">
+
+                    <TextView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:text="2"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:background="@drawable/bg_circle_blue"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Contact 2"
+                        android:textColor="#1565C0"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.05"
+                        android:layout_marginStart="10dp"/>
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/name2"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:hint="Full Name"
+                    android:textColor="#1A1A2E"
+                    android:textColorHint="#90A4AE"
+                    android:textSize="15sp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:background="@drawable/input_bg_light"
+                    android:layout_marginBottom="10dp"/>
+
+                <EditText
+                    android:id="@+id/phone2"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:hint="Phone Number"
+                    android:textColor="#1A1A2E"
+                    android:textColorHint="#90A4AE"
+                    android:textSize="15sp"
+                    android:inputType="phone"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:background="@drawable/input_bg_light"/>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Contact 3 -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="8dp"
+            app:cardBackgroundColor="#FFFFFF"
+            android:layout_marginBottom="28dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="14dp">
+
+                    <TextView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:text="3"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:background="@drawable/bg_circle_blue"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Contact 3"
+                        android:textColor="#1565C0"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.05"
+                        android:layout_marginStart="10dp"/>
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/name3"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:hint="Full Name"
+                    android:textColor="#1A1A2E"
+                    android:textColorHint="#90A4AE"
+                    android:textSize="15sp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:background="@drawable/input_bg_light"
+                    android:layout_marginBottom="10dp"/>
+
+                <EditText
+                    android:id="@+id/phone3"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:hint="Phone Number"
+                    android:textColor="#1A1A2E"
+                    android:textColorHint="#90A4AE"
+                    android:textSize="15sp"
+                    android:inputType="phone"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:background="@drawable/input_bg_light"/>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Save Button -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="10dp"
+            app:cardBackgroundColor="#42A5F5">
+
+            <Button
+                android:id="@+id/btnSave"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="💾  Save Contacts"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.06"
+                android:stateListAnimator="@null"/>
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+</ScrollView>

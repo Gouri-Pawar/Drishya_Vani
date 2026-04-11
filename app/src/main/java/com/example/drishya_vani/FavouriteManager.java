@@ -2,8 +2,9 @@ package com.example.drishya_vani;
 
 import android.content.Context;
 import android.provider.Settings;
-
 import com.google.firebase.firestore.FirebaseFirestore;
+import java.util.HashMap;
+import java.util.Map;
 
 public class FavouriteManager {
 
@@ -17,34 +18,44 @@ public class FavouriteManager {
                 Settings.Secure.ANDROID_ID);
     }
 
-    // ⭐ Add to favourites
-    public void addFavourite(String placeName) {
+    // ⭐ ADD FAVOURITE
+    public void addFavourite(String name, String type, String placeType, double lat, double lon) {
+
+        String key = FavouriteModel.generateKey(name, lat, lon);
+
+        Map<String, Object> data = new HashMap<>();
+        data.put("key", key);
+        data.put("name", name);
+        data.put("type", type);
+        // FIX: placeType param was being silently dropped — now stored in Firestore
+        data.put("placeType", placeType);
+        data.put("lat", lat);
+        data.put("lon", lon);
+
         db.collection("favourites")
                 .document(userId)
                 .collection("places")
-                .document(placeName)
-                .set(new PlaceFavModel(placeName));
+                .document(key)
+                .set(data);
     }
 
-    // ❌ Remove from favourites
-    public void removeFavourite(String placeName) {
+    // ⭐ REMOVE FAVOURITE
+    public void removeFavourite(String key) {
         db.collection("favourites")
                 .document(userId)
                 .collection("places")
-                .document(placeName)
+                .document(key)
                 .delete();
     }
 
-    // 🔍 Check if already favourite
-    public void isFavourite(String placeName, FavouriteCallback callback) {
+    // ⭐ CHECK FAVOURITE
+    public void isFavourite(String key, FavouriteCallback callback) {
         db.collection("favourites")
                 .document(userId)
                 .collection("places")
-                .document(placeName)
+                .document(key)
                 .get()
-                .addOnSuccessListener(doc -> {
-                    callback.onResult(doc.exists());
-                });
+                .addOnSuccessListener(doc -> callback.onResult(doc.exists()));
     }
 
     public interface FavouriteCallback {

@@ -2,31 +2,32 @@ package com.example.drishya_vani;
 
 public class FavouriteModel {
 
-    private String id;
+    private String key;
     private String name;
+    private String type;
+    private double lat;
+    private double lon;
+    private double distance;
 
-    // Required empty constructor for Firebase
-    public FavouriteModel(String name) {
-    }
-
-    public FavouriteModel(String id, String name) {
-        this.id = id;
+    public FavouriteModel(String key, String name, String type,
+                          double lat, double lon, double distance) {
+        this.key = key;
         this.name = name;
+        this.type = type;
+        this.lat = lat;
+        this.lon = lon;
+        this.distance = distance;
     }
 
-    public String getId() {
-        return id;
-    }
+    public String getKey()      { return key; }
+    public String getName()     { return name; }
+    public String getType()     { return type; }
+    public double getLat()      { return lat; }
+    public double getLon()      { return lon; }
+    public double getDistance() { return distance; }
 
-    public String getName() {
+    // universal key generator ⭐
+    public static String generateKey(String name,double lat,double lon){
         return name;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 }

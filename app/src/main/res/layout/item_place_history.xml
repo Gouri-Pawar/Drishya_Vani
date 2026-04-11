@@ -33,11 +33,11 @@
                 android:id="@+id/imgPlaceIcon"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/ic_location_pin"
+                android:src="@drawable/ic_map_location"
                 android:padding="10dp"
                 android:scaleType="centerInside"
-                android:tint="#1565C0"
-                android:contentDescription="Place icon" />
+                android:contentDescription="Place icon"
+                app:tint="#1565C0" />
 
         </androidx.cardview.widget.CardView>
 
@@ -53,7 +53,7 @@
             android:layout_marginBottom="14dp">
 
             <TextView
-                android:id="@+id/txtPlaceName"
+                android:id="@+id/placeName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Place Name"
@@ -64,7 +64,7 @@
                 android:ellipsize="end" />
 
             <TextView
-                android:id="@+id/txtVisitedDate"
+                android:id="@+id/placeVisits"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Visited · 3 days ago"

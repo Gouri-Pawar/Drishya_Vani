@@ -21,14 +21,16 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
 public class NearbyPlaces extends AppCompatActivity {
 
     RecyclerView recyclerView;
     NearbyAdapter adapter;
     ArrayList<NearbyPlaceModel> placeList;
-
     FusedLocationProviderClient fusedLocationClient;
 
     @Override
@@ -44,15 +46,12 @@ public class NearbyPlaces extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-
         getLocation();
     }
 
     private void getLocation() {
-
         if (ActivityCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 101);
             return;
@@ -60,35 +59,45 @@ public class NearbyPlaces extends AppCompatActivity {
 
         fusedLocationClient.getLastLocation().addOnSuccessListener(location -> {
             if (location != null) {
-                fetchNearbyPlaces(location); // ✅ FIXED CALL
+                fetchNearbyPlaces(location.getLatitude(), location.getLongitude());
             } else {
-                Toast.makeText(this, "Location not found", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Location not found. Try again.", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    // ✅ FIXED METHOD
-    private void fetchNearbyPlaces(Location location) {
-        double lat = location.getLatitude();
-        double lon = location.getLongitude();
-
-        fetchNearbyPlaces(lat, lon);
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 101 &&
+                grantResults.length > 0 &&
+                grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            getLocation();
+        } else {
+            Toast.makeText(this, "Location permission denied", Toast.LENGTH_SHORT).show();
+        }
     }
 
-    private void fetchNearbyPlaces(double lat, double lon) {
-
+    private void fetchNearbyPlaces(double userLat, double userLon) {
         new Thread(() -> {
             try {
+                String query =
+                        "[out:json][timeout:25];" +
+                                "(" +
+                                "  node(around:5000," + userLat + "," + userLon + ")[\"tourism\"][\"name\"];" +
+                                "  node(around:5000," + userLat + "," + userLon + ")[\"amenity\"][\"name\"];" +
+                                "  node(around:5000," + userLat + "," + userLon + ")[\"historic\"][\"name\"];" +
+                                ");" +
+                                "out body;";
 
-                String urlString =
-                        "https://overpass-api.de/api/interpreter?data=[out:json];(" +
-                                "node(around:5000," + lat + "," + lon + ")[\"tourism\"];"+
-                                "node(around:5000," + lat + "," + lon + ")[\"amenity\"];"+
-                                "node(around:5000," + lat + "," + lon + ")[\"historic\"];"+
-                                ");out;";
+                String urlString = "https://overpass-api.de/api/interpreter?data="
+                        + java.net.URLEncoder.encode(query, "UTF-8");
 
                 URL url = new URL(urlString);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setConnectTimeout(15000);
+                conn.setReadTimeout(20000);
 
                 InputStream is = conn.getInputStream();
                 Scanner scanner = new Scanner(is).useDelimiter("\\A");
@@ -97,37 +106,65 @@ public class NearbyPlaces extends AppCompatActivity {
                 JSONObject jsonObject = new JSONObject(response);
                 JSONArray elements = jsonObject.getJSONArray("elements");
 
-                placeList.clear();
+                ArrayList<NearbyPlaceModel> fetchedList = new ArrayList<>();
+                Set<String> seenKeys = new HashSet<>();
 
                 for (int i = 0; i < elements.length(); i++) {
-
                     JSONObject obj = elements.getJSONObject(i);
                     JSONObject tags = obj.optJSONObject("tags");
 
-                    String name = "Unknown Place";
+                    if (tags == null) continue;
 
-                    if (tags != null) {
-                        if (tags.has("name")) {
-                            name = tags.getString("name");
-                        } else if (tags.has("tourism")) {
-                            name = tags.getString("tourism"); // fallback
-                        }
-                    }
+                    if (!tags.has("name")) continue;
+                    String name = tags.getString("name").trim();
+                    if (name.isEmpty()) continue;
 
-                    placeList.add(new NearbyPlaceModel(name));
+                    String nodeId = obj.optString("id", "");
+                    if (seenKeys.contains(nodeId)) continue;
+                    seenKeys.add(nodeId);
+
+                    String type = "place";
+                    if (tags.has("tourism"))       type = tags.getString("tourism");
+                    else if (tags.has("amenity"))  type = tags.getString("amenity");
+                    else if (tags.has("historic")) type = tags.getString("historic");
+
+                    double placeLat = obj.optDouble("lat", 0);
+                    double placeLon = obj.optDouble("lon", 0);
+
+                    float[] result = new float[1];
+                    Location.distanceBetween(userLat, userLon, placeLat, placeLon, result);
+                    double distanceMeters = result[0];
+
+                    fetchedList.add(new NearbyPlaceModel(name, placeLat, placeLon,
+                            type, distanceMeters));
                 }
 
-                Log.d("COUNT", "Total places: " + placeList.size());
+                Collections.sort(fetchedList,
+                        (a, b) -> Double.compare(a.getDistance(), b.getDistance()));
+
+                Log.d("NEARBY", "Total valid places: " + fetchedList.size());
 
                 runOnUiThread(() -> {
+                    placeList.clear();
+                    placeList.addAll(fetchedList);
                     adapter.notifyDataSetChanged();
-                    Toast.makeText(this, "Total places: " + placeList.size(), Toast.LENGTH_SHORT).show();
+
+                    if (fetchedList.isEmpty()) {
+                        Toast.makeText(this,
+                                "No named places found nearby", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(this,
+                                fetchedList.size() + " places found nearby",
+                                Toast.LENGTH_SHORT).show();
+                    }
                 });
 
             } catch (Exception e) {
-                e.printStackTrace();
+                Log.e("NEARBY", "Fetch error: " + e.getMessage(), e);
                 runOnUiThread(() ->
-                        Toast.makeText(this, "Error fetching places", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this,
+                                "Error fetching places. Check internet connection.",
+                                Toast.LENGTH_SHORT).show()
                 );
             }
         }).start();

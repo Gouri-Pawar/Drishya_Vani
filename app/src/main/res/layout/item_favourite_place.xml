@@ -15,31 +15,32 @@
         android:layout_height="wrap_content"
         android:padding="16dp">
 
-        <!-- Thumbnail -->
-        <ImageView
-            android:id="@+id/imgPlaceThumb"
+        <!-- Emoji Icon (was ImageView, now TextView to show emoji) -->
+        <!-- FIX: Changed ImageView → TextView with id txtPlaceEmoji to match adapter -->
+        <TextView
+            android:id="@+id/txtPlaceEmoji"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:src="@drawable/ic_place_default"
+            android:gravity="center"
+            android:textSize="28sp"
             android:background="@drawable/bg_thumb_rounded"
-            android:padding="12dp"
-            android:scaleType="centerInside"
             android:layout_centerVertical="true"
-            android:contentDescription="Place icon" />
+            android:text="📍" />
 
-        <!-- ❤️ Heart Button (clickable + ripple) -->
+        <!-- ❤️ Heart Button (remove from favourites) -->
+        <!-- FIX: id changed from imgHeart → imgFav to match adapter's imgRemove binding -->
         <ImageView
-            android:id="@+id/imgHeart"
+            android:id="@+id/imgFav"
             android:layout_width="34dp"
             android:layout_height="34dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_heart_outline"
+            android:src="@drawable/ic_heart_filled"
             android:padding="5dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:clickable="true"
             android:focusable="true"
-            android:contentDescription="Favourite"
+            android:contentDescription="Remove from Favourites"
             app:tint="#FF5A5F"/>
 
         <!-- Text Block -->
@@ -47,12 +48,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_toEndOf="@id/imgPlaceThumb"
-            android:layout_toStartOf="@id/imgHeart"
+            android:layout_toEndOf="@id/txtPlaceEmoji"
+            android:layout_toStartOf="@id/imgFav"
             android:layout_centerVertical="true"
             android:paddingStart="14dp"
             android:paddingEnd="10dp">
 
+            <!-- Place Name -->
             <TextView
                 android:id="@+id/txtPlaceName"
                 android:layout_width="wrap_content"
@@ -64,24 +66,36 @@
                 android:maxLines="1"
                 android:ellipsize="end" />
 
+            <!-- FIX: Added txtPlaceType TextView (was missing, adapter calls holder.placeType.setText()) -->
+            <TextView
+                android:id="@+id/txtPlaceType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="12sp"
+                android:textColor="#AB84ED"
+                android:layout_marginTop="3dp" />
+
+            <!-- Distance row -->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:layout_marginTop="6dp">
+                android:layout_marginTop="4dp">
 
                 <ImageView
                     android:layout_width="14dp"
                     android:layout_height="14dp"
-                    android:src="@drawable/ic_map_location"
-                    app:tint="#7B5EA7"/>
+                    android:src="@drawable/ic_place_default"
+                    app:tint="#AB84ED"/>
 
+                <!-- FIX: id changed from txtFavStatus → txtDistance to match adapter -->
                 <TextView
-                    android:id="@+id/txtFavStatus"
+                    android:id="@+id/txtDistance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tap heart to save"
+                    android:text="Distance unavailable"
                     android:textSize="12sp"
                     android:textColor="#7C7C9A"
                     android:layout_marginStart="5dp"/>
