@@ -4,26 +4,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    android:background="#E3F2FD">
+    android:background="#F5F7FF">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- Header -->
+        <!-- ── HEADER ── -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="280dp"
             android:orientation="vertical"
             android:gravity="center"
-            android:background="@drawable/header_gradient">
+            android:background="@drawable/bg_about_gradient"
+            android:paddingTop="52dp"
+            android:paddingBottom="52dp"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp">
 
             <ImageView
-                android:layout_width="85dp"
-                android:layout_height="85dp"
+                android:layout_width="78dp"
+                android:layout_height="78dp"
                 android:src="@drawable/logo"
-                android:layout_marginBottom="12dp"/>
+                android:background="@drawable/bg_logo_circle"
+                android:padding="14dp"
+                android:scaleType="fitCenter"
+                android:layout_marginBottom="16dp"
+                android:contentDescription="Drishya-Vani logo" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -31,80 +39,232 @@
                 android:text="Select Language"
                 android:textColor="#FFFFFF"
                 android:textSize="26sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:letterSpacing="0.02" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Choose your preferred language for the guide"
-                android:textColor="#E3F2FD"
-                android:textSize="14sp"
-                android:layout_marginTop="6dp"/>
+                android:textColor="#B3D1FF"
+                android:textSize="13sp"
+                android:gravity="center"
+                android:layout_marginTop="6dp" />
 
         </LinearLayout>
 
-        <!-- Language Section -->
+        <!-- ── LANGUAGE CARDS ── -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="24dp"
-            android:layout_marginTop="70dp">
+            android:paddingStart="18dp"
+            android:paddingEnd="18dp"
+            android:paddingBottom="36dp"
+            android:layout_marginTop="-26dp">
 
             <!-- English -->
+            <!-- English -->
             <androidx.cardview.widget.CardView
+                android:id="@+id/englishBtn"
                 android:layout_width="match_parent"
-                android:layout_height="65dp"
-                android:layout_marginBottom="30dp"
+                android:layout_height="72dp"
+                android:layout_marginBottom="14dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
                 app:cardCornerRadius="20dp"
-                app:cardElevation="8dp">
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="#FFFFFF">
 
-                <Button
-                    android:id="@+id/englishBtn"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="🇬🇧 English"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFF"
-                    android:backgroundTint="#1976D2"/>
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <LinearLayout
+                        android:layout_width="58dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:background="@drawable/bg_lang_badge_blue">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="🇬🇧"
+                            android:textSize="24sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:paddingStart="14dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="English"
+                            android:textSize="17sp"
+                            android:textStyle="bold"
+                            android:textColor="#1A1A2E" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Continue in English"
+                            android:textSize="12sp"
+                            android:textColor="#7C93B8"
+                            android:layout_marginTop="2dp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:src="@drawable/ic_chevron_right"
+                        android:background="@drawable/bg_arrow_blue"
+                        android:padding="9dp"
+                        android:layout_marginEnd="14dp"
+                        android:scaleType="fitCenter"
+                        android:contentDescription="Select"
+                        app:tint="#1565C0" />
+
+                </LinearLayout>
             </androidx.cardview.widget.CardView>
 
             <!-- Hindi -->
+            <!-- Hindi -->
             <androidx.cardview.widget.CardView
+                android:id="@+id/hindiBtn"
                 android:layout_width="match_parent"
-                android:layout_height="65dp"
-                android:layout_marginBottom="30dp"
+                android:layout_height="72dp"
+                android:layout_marginBottom="14dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
                 app:cardCornerRadius="20dp"
-                app:cardElevation="8dp">
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="#FFFFFF">
 
-                <Button
-                    android:id="@+id/hindiBtn"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="🇮🇳 Hindi"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFF"
-                    android:backgroundTint="#0D47A1"/>
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <LinearLayout
+                        android:layout_width="58dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:background="@drawable/bg_lang_badge_pink">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="🇮🇳"
+                            android:textSize="24sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:paddingStart="14dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Hindi"
+                            android:textSize="17sp"
+                            android:textStyle="bold"
+                            android:textColor="#1A1A2E" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="हिंदी में जारी रखें"
+                            android:textSize="12sp"
+                            android:textColor="#7C93B8"
+                            android:layout_marginTop="2dp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:src="@drawable/ic_chevron_right"
+                        android:background="@drawable/bg_arrow_pink"
+                        android:padding="9dp"
+                        android:layout_marginEnd="14dp"
+                        android:scaleType="fitCenter"
+                        android:contentDescription="Select"
+                        app:tint="#C2185B" />
+
+                </LinearLayout>
             </androidx.cardview.widget.CardView>
 
             <!-- Marathi -->
+            <!-- Marathi -->
             <androidx.cardview.widget.CardView
+                android:id="@+id/marathiBtn"
                 android:layout_width="match_parent"
-                android:layout_height="65dp"
+                android:layout_height="72dp"
+                android:layout_marginBottom="14dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
                 app:cardCornerRadius="20dp"
-                app:cardElevation="8dp">
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="#FFFFFF">
 
-                <Button
-                    android:id="@+id/marathiBtn"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="🇮🇳 Marathi"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFF"
-                    android:backgroundTint="#1976D2"/>
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <LinearLayout
+                        android:layout_width="58dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:background="@drawable/bg_lang_badge_purple">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="🇮🇳"
+                            android:textSize="24sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:paddingStart="14dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Marathi"
+                            android:textSize="17sp"
+                            android:textStyle="bold"
+                            android:textColor="#1A1A2E" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="मराठीत सुरू ठेवा"
+                            android:textSize="12sp"
+                            android:textColor="#7C93B8"
+                            android:layout_marginTop="2dp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:src="@drawable/ic_chevron_right"
+                        android:background="@drawable/bg_arrow_purple"
+                        android:padding="9dp"
+                        android:layout_marginEnd="14dp"
+                        android:scaleType="fitCenter"
+                        android:contentDescription="Select"
+                        app:tint="#7B1FA2" />
+
+                </LinearLayout>
             </androidx.cardview.widget.CardView>
 
         </LinearLayout>

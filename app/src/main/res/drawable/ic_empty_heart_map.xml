@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="140dp"
+    android:height="140dp"
+    android:viewportWidth="140"
+    android:viewportHeight="140">
+
+    <!-- Soft background circle -->
+    <path
+        android:fillColor="#EDE9FF"
+        android:pathData="M70,10m-60,0a60,60 0,1 1,120 0a60,60 0,1 1,-120 0" />
+
+    <!-- Map base shape -->
+    <path
+        android:fillColor="#C4B5F4"
+        android:pathData="M35,55 L55,48 L85,55 L105,48 L105,95 L85,102 L55,95 L35,102 Z" />
+
+    <!-- Map fold lines -->
+    <path
+        android:fillColor="#A78BF5"
+        android:pathData="M55,48 L55,95" />
+    <path
+        android:fillColor="#A78BF5"
+        android:pathData="M85,55 L85,102" />
+
+    <!-- Heart on map -->
+    <path
+        android:fillColor="#E24B4A"
+        android:pathData="M70,85 C70,85 55,74 55,64.5 C55,59.8 58.8,56 63.5,56 C66.2,56 68.7,57.3 70,59.3 C71.3,57.3 73.8,56 76.5,56 C81.2,56 85,59.8 85,64.5 C85,74 70,85 70,85 Z" />
+</vector>

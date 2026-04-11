@@ -1,31 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/light_gradient">
+    android:background="#F5F7FF">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="20dp">
+        android:orientation="vertical">
 
-        <!-- HEADER -->
+        <!-- ── HEADER ── -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="220dp"
+            android:layout_height="230dp"
             android:orientation="vertical"
             android:gravity="center"
-            android:background="@drawable/header_gradient"
-            android:layout_marginBottom="20dp"
-            android:padding="20dp">
+            android:background="@drawable/bg_about_gradient"
+            android:paddingTop="48dp"
+            android:paddingBottom="32dp"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp">
 
             <ImageView
-                android:layout_width="90dp"
-                android:layout_height="90dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:src="@drawable/logo"
-                android:layout_marginBottom="10dp"/>
+                android:background="@drawable/bg_logo_circle"
+                android:padding="14dp"
+                android:scaleType="fitCenter"
+                android:layout_marginBottom="14dp"
+                android:contentDescription="Drishya-Vani logo" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -33,226 +38,426 @@
                 android:text="Drishya-Vani"
                 android:textSize="26sp"
                 android:textStyle="bold"
-                android:textColor="#FFFFFF"/>
+                android:textColor="#FFFFFF"
+                android:letterSpacing="0.02" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Your Smart Location-Based Guide"
-                android:textSize="14sp"
-                android:textColor="#E3F2FD"
-                android:layout_marginTop="5dp"/>
+                android:textSize="13sp"
+                android:textColor="#B3D1FF"
+                android:layout_marginTop="5dp" />
+
         </LinearLayout>
 
-
-        <!-- WHAT IS APP -->
-        <androidx.cardview.widget.CardView
+        <!-- ── CONTENT PADDING WRAPPER ── -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="18dp"
-            app:cardElevation="6dp"
-            android:layout_marginBottom="15dp">
+            android:orientation="vertical"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="28dp">
 
-            <LinearLayout
-                android:padding="16dp"
-                android:orientation="vertical"
+            <!-- ABOUT THE APP -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_width="wrap_content">
+                android:layout_marginBottom="12dp"
+                app:cardCornerRadius="18dp"
+                app:cardElevation="4dp"
+                app:cardBackgroundColor="#FFFFFF">
 
-                <TextView
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="🌍 About the App"
-                    android:textStyle="bold"
-                    android:textSize="18sp"
-                    android:textColor="#0D47A1"/>
+                    android:orientation="vertical"
+                    android:padding="18dp">
 
-                <TextView
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="Drishya-Vani detects your real-time location and provides instant information about nearby places, landmarks, and surroundings. It transforms your everyday travel into an informative and interactive experience."
-                    android:textSize="14sp"
-                    android:textColor="#444"
-                    android:layout_marginTop="6dp"/>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="10dp">
 
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:layout_marginEnd="10dp"
+                            app:cardCornerRadius="9dp"
+                            app:cardElevation="0dp"
+                            app:cardBackgroundColor="#EAF0FF">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="🌍"
+                                android:textSize="15sp"
+                                android:gravity="center" />
+                        </androidx.cardview.widget.CardView>
 
-        <!-- FEATURES -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="18dp"
-            app:cardElevation="6dp"
-            android:layout_marginBottom="15dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="About the App"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="#0D47A1" />
+                    </LinearLayout>
 
-            <LinearLayout
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#EEF2FF"
+                        android:layout_marginBottom="10dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Drishya-Vani detects your real-time location and provides instant information about nearby places, landmarks, and surroundings. It transforms your everyday travel into an informative and interactive experience."
+                        android:textSize="14sp"
+                        android:textColor="#4B5563"
+                        android:lineSpacingMultiplier="1.5" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- KEY FEATURES -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:padding="16dp"
-                android:orientation="vertical">
+                android:layout_marginBottom="12dp"
+                app:cardCornerRadius="18dp"
+                app:cardElevation="4dp"
+                app:cardBackgroundColor="#FFFFFF">
 
-                <TextView
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="✨ Key Features"
-                    android:textStyle="bold"
-                    android:textSize="18sp"
-                    android:textColor="#0D47A1"/>
+                    android:orientation="vertical"
+                    android:padding="18dp">
 
-                <TextView
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="■ Detects your current location\n■ Shows nearby places instantly\n■ Audio storytelling (TTS)\n■ Multi-language support\n■ Saves your visited places\n■ Map navigation support"
-                    android:textSize="14sp"
-                    android:textColor="#444"
-                    android:layout_marginTop="6dp"/>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="10dp">
 
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:layout_marginEnd="10dp"
+                            app:cardCornerRadius="9dp"
+                            app:cardElevation="0dp"
+                            app:cardBackgroundColor="#F3F0FF">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="✨"
+                                android:textSize="15sp"
+                                android:gravity="center" />
+                        </androidx.cardview.widget.CardView>
 
-        <!-- HOW IT WORKS -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="18dp"
-            app:cardElevation="6dp"
-            android:layout_marginBottom="15dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Key Features"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="#0D47A1" />
+                    </LinearLayout>
 
-            <LinearLayout
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#EEF2FF"
+                        android:layout_marginBottom="10dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="•  Detects your current location\n•  Shows nearby places instantly\n•  Audio storytelling (TTS)\n•  Multi-language support\n•  Saves your visited places\n•  Map navigation support"
+                        android:textSize="14sp"
+                        android:textColor="#4B5563"
+                        android:lineSpacingMultiplier="1.7" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- HOW IT WORKS -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:padding="16dp"
-                android:orientation="vertical">
+                android:layout_marginBottom="12dp"
+                app:cardCornerRadius="18dp"
+                app:cardElevation="4dp"
+                app:cardBackgroundColor="#FFFFFF">
 
-                <TextView
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="⚙️ How It Works"
-                    android:textStyle="bold"
-                    android:textSize="18sp"
-                    android:textColor="#0D47A1"/>
+                    android:orientation="vertical"
+                    android:padding="18dp">
 
-                <TextView
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="1. Open the app\n2. Allow location access\n3 ️. App detects your surroundings\n4. Get instant place information\n5. Listen to stories in your language"
-                    android:textSize="14sp"
-                    android:textColor="#444"
-                    android:layout_marginTop="6dp"/>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="10dp">
 
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:layout_marginEnd="10dp"
+                            app:cardCornerRadius="9dp"
+                            app:cardElevation="0dp"
+                            app:cardBackgroundColor="#E8F5E9">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="⚙️"
+                                android:textSize="15sp"
+                                android:gravity="center" />
+                        </androidx.cardview.widget.CardView>
 
-        <!-- DATA SOURCES -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="18dp"
-            app:cardElevation="6dp"
-            android:layout_marginBottom="15dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="How It Works"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="#0D47A1" />
+                    </LinearLayout>
 
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#EEF2FF"
+                        android:layout_marginBottom="10dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="1.  Open the app\n2.  Allow location access\n3.  App detects your surroundings\n4.  Get instant place information\n5.  Listen to stories in your language"
+                        android:textSize="14sp"
+                        android:textColor="#4B5563"
+                        android:lineSpacingMultiplier="1.7" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- DATA SOURCES + PRIVACY (side by side) -->
             <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:padding="16dp"
-                android:orientation="vertical">
+                android:orientation="horizontal"
+                android:layout_marginBottom="12dp">
 
-                <TextView
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="📚 Data Sources"
-                    android:textStyle="bold"
-                    android:textSize="18sp"
-                    android:textColor="#0D47A1"/>
+                <!-- Data Sources -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="6dp"
+                    app:cardCornerRadius="18dp"
+                    app:cardElevation="4dp"
+                    app:cardBackgroundColor="#FFFFFF">
 
-                <TextView
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="• Wikipedia API\n• Google Maps API\n• Unsplash Images"
-                    android:textSize="14sp"
-                    android:textColor="#444"
-                    android:layout_marginTop="6dp"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:layout_marginBottom="8dp"
+                            app:cardCornerRadius="9dp"
+                            app:cardElevation="0dp"
+                            app:cardBackgroundColor="#FFF8E1">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="📚"
+                                android:textSize="15sp"
+                                android:gravity="center" />
+                        </androidx.cardview.widget.CardView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Data Sources"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:textColor="#0D47A1"
+                            android:layout_marginBottom="8dp" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#EEF2FF"
+                            android:layout_marginBottom="8dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Wikipedia API\nGoogle Maps API\nUnsplash Images"
+                            android:textSize="13sp"
+                            android:textColor="#4B5563"
+                            android:lineSpacingMultiplier="1.6" />
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- Privacy -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginStart="6dp"
+                    app:cardCornerRadius="18dp"
+                    app:cardElevation="4dp"
+                    app:cardBackgroundColor="#FFFFFF">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:layout_marginBottom="8dp"
+                            app:cardCornerRadius="9dp"
+                            app:cardElevation="0dp"
+                            app:cardBackgroundColor="#FCE4EC">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="🔒"
+                                android:textSize="15sp"
+                                android:gravity="center" />
+                        </androidx.cardview.widget.CardView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Privacy"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:textColor="#0D47A1"
+                            android:layout_marginBottom="8dp" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#EEF2FF"
+                            android:layout_marginBottom="8dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Location used locally only. No personal data stored or shared."
+                            android:textSize="13sp"
+                            android:textColor="#4B5563"
+                            android:lineSpacingMultiplier="1.6" />
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
 
-
-        <!-- PRIVACY -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="18dp"
-            app:cardElevation="6dp"
-            android:layout_marginBottom="15dp">
-
-            <LinearLayout
+            <!-- CONTACT -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:padding="16dp"
-                android:orientation="vertical">
+                android:layout_marginBottom="20dp"
+                app:cardCornerRadius="18dp"
+                app:cardElevation="4dp"
+                app:cardBackgroundColor="#FFFFFF">
 
-                <TextView
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="🔒 Privacy"
-                    android:textStyle="bold"
-                    android:textSize="18sp"
-                    android:textColor="#0D47A1"/>
+                    android:orientation="vertical"
+                    android:padding="18dp">
 
-                <TextView
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="Your location is used only to detect nearby places. We do not store or share your personal data. Your history is securely stored per user."
-                    android:textSize="14sp"
-                    android:textColor="#444"
-                    android:layout_marginTop="6dp"/>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="10dp">
 
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:layout_marginEnd="10dp"
+                            app:cardCornerRadius="9dp"
+                            app:cardElevation="0dp"
+                            app:cardBackgroundColor="#EDE7F6">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="📩"
+                                android:textSize="15sp"
+                                android:gravity="center" />
+                        </androidx.cardview.widget.CardView>
 
-        <!-- CONTACT -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="18dp"
-            app:cardElevation="6dp"
-            android:layout_marginBottom="20dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Contact and Feedback"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="#0D47A1" />
+                    </LinearLayout>
 
-            <LinearLayout
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:padding="16dp"
-                android:orientation="vertical">
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#EEF2FF"
+                        android:layout_marginBottom="10dp" />
 
-                <TextView
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="📩 Contact and Feedback"
-                    android:textStyle="bold"
-                    android:textSize="18sp"
-                    android:textColor="#0D47A1"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="drishyavani@gmail.com"
+                        android:textSize="14sp"
+                        android:textColor="#7B1FA2"
+                        android:textStyle="bold" />
 
-                <TextView
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="Email: drishyavani@gmail.com\nWe’d love your feedback to improve the app!"
-                    android:textSize="14sp"
-                    android:textColor="#444"
-                    android:layout_marginTop="6dp"/>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="We'd love your feedback to improve the app!"
+                        android:textSize="13sp"
+                        android:textColor="#4B5563"
+                        android:layout_marginTop="4dp" />
 
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
-        <!-- RATE BUTTON -->
-        <Button
-            android:id="@+id/rateBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="⭐ Rate this App"
-            android:textAllCaps="false"
-            android:textColor="#FFFFFF"
-            android:backgroundTint="#1565C0"
-            android:layout_marginBottom="20dp"/>
+            <!-- RATE BUTTON -->
+            <Button
+                android:id="@+id/rateBtn"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:text="⭐  Rate this App"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:backgroundTint="#1565C0"
+                android:layout_marginBottom="8dp" />
+
+        </LinearLayout>
 
     </LinearLayout>
 

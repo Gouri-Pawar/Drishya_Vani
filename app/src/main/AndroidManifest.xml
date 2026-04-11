@@ -17,6 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Drishya_Vani">
         <activity
+            android:name=".Favourite_Places"
+            android:exported="false" />
+        <activity
             android:name=".NearbyPlaces"
             android:exported="false" />
         <activity

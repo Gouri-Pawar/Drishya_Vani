@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    android:background="#E3F2FD">
+    android:background="#F0F4FF">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,43 +14,58 @@
         <!-- HEADER -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:background="@drawable/header_gradient"
+            android:layout_height="220dp"
+            android:background="@drawable/bg_history_gradient"
             android:gravity="center"
             android:orientation="vertical"
-            android:padding="20dp">
+            android:paddingTop="48dp"
+            android:paddingBottom="28dp"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="🧭 Travel History"
+                android:text="🧭"
+                android:textSize="34sp"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Travel History"
                 android:textColor="#FFFFFF"
                 android:textSize="26sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:letterSpacing="0.02" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Track every place you've explored"
-                android:textColor="#E3F2FD"
+                android:textColor="#B3D1FF"
                 android:textSize="14sp"
                 android:layout_marginTop="6dp" />
 
         </LinearLayout>
 
+        <!-- CARD -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            app:cardCornerRadius="24dp"
-            app:cardElevation="10dp"
-            app:cardUseCompatPadding="true">
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="24dp"
+            app:cardCornerRadius="22dp"
+            app:cardElevation="8dp"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardUseCompatPadding="false">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="#FFFFFF"
                 android:padding="20dp">
 
                 <!-- Section Header -->
@@ -59,30 +74,42 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
-                    android:layout_marginBottom="12dp">
+                    android:layout_marginBottom="14dp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="📍"
-                        android:textSize="20sp"
-                        android:layout_marginEnd="8dp"/>
+                    <!-- Icon badge -->
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_marginEnd="10dp"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="0dp"
+                        app:cardBackgroundColor="#EAF0FF">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="📍"
+                            android:textSize="17sp"
+                            android:gravity="center" />
+
+                    </androidx.cardview.widget.CardView>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Visited Places"
-                        android:textSize="20sp"
+                        android:textSize="18sp"
                         android:textStyle="bold"
-                        android:textColor="#0D47A1"/>
+                        android:textColor="#0D47A1" />
+
                 </LinearLayout>
 
                 <!-- Divider -->
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="#E3F2FD"
-                    android:layout_marginBottom="12dp"/>
+                    android:background="#DCE8FF"
+                    android:layout_marginBottom="16dp" />
 
                 <!-- RecyclerView -->
                 <androidx.recyclerview.widget.RecyclerView
@@ -91,7 +118,7 @@
                     android:layout_height="wrap_content"
                     android:nestedScrollingEnabled="false"
                     android:clipToPadding="false"
-                    android:paddingBottom="8dp"/>
+                    android:paddingBottom="8dp" />
 
                 <!-- Empty State -->
                 <TextView
@@ -103,7 +130,8 @@
                     android:textSize="14sp"
                     android:gravity="center"
                     android:visibility="gone"
-                    android:layout_marginTop="10dp"/>
+                    android:paddingTop="16dp"
+                    android:paddingBottom="8dp" />
 
             </LinearLayout>
 

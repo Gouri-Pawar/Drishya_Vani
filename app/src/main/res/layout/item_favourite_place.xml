@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="14dp"
+    android:foreground="?attr/selectableItemBackground"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="6dp"
+    app:cardBackgroundColor="#FFFFFF">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <!-- Thumbnail -->
+        <ImageView
+            android:id="@+id/imgPlaceThumb"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/ic_place_default"
+            android:background="@drawable/bg_thumb_rounded"
+            android:padding="12dp"
+            android:scaleType="centerInside"
+            android:layout_centerVertical="true"
+            android:contentDescription="Place icon" />
+
+        <!-- ❤️ Heart Button (clickable + ripple) -->
+        <ImageView
+            android:id="@+id/imgHeart"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_heart_outline"
+            android:padding="5dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:contentDescription="Favourite"
+            app:tint="#FF5A5F"/>
+
+        <!-- Text Block -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_toEndOf="@id/imgPlaceThumb"
+            android:layout_toStartOf="@id/imgHeart"
+            android:layout_centerVertical="true"
+            android:paddingStart="14dp"
+            android:paddingEnd="10dp">
+
+            <TextView
+                android:id="@+id/txtPlaceName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Place Name"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:textColor="#1A1A2E"
+                android:maxLines="1"
+                android:ellipsize="end" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="6dp">
+
+                <ImageView
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:src="@drawable/ic_map_location"
+                    app:tint="#7B5EA7"/>
+
+                <TextView
+                    android:id="@+id/txtFavStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tap heart to save"
+                    android:textSize="12sp"
+                    android:textColor="#7C7C9A"
+                    android:layout_marginStart="5dp"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

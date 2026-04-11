@@ -3,8 +3,8 @@
     android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#86D9FF"
-    android:padding="16dp">
+    android:background="#EAF6FF"
+    android:padding="20dp">
 
     <!-- Title -->
     <TextView
@@ -12,53 +12,77 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Your Location"
-        android:textSize="24sp"
+        android:textSize="26sp"
         android:textStyle="bold"
-        android:textColor="@color/dark_blue"
+        android:textColor="#0D3B66"
+        android:letterSpacing="0.03"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"/>
+        android:layout_marginTop="48dp" />
 
-    <!-- Map Icon -->
-    <ImageView
-        android:id="@+id/imgMapIcon"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
+    <!-- Subtitle -->
+    <TextView
+        android:id="@+id/txtMapSubtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Find and share where you are"
+        android:textSize="13sp"
+        android:textColor="#5B8DB8"
         android:layout_below="@id/txtMapTitle"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:src="@drawable/ic_map_location"
-        android:contentDescription="Map Icon" />
+        android:layout_marginTop="4dp" />
+
+    <!-- Map Icon inside a white pill card -->
+    <LinearLayout
+        android:id="@+id/iconCard"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_below="@id/txtMapSubtitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/bg_icon_card"
+        android:gravity="center"
+        android:elevation="4dp">
+
+        <ImageView
+            android:id="@+id/imgMapIcon"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:src="@drawable/ic_map_location"
+            android:contentDescription="Map Icon" />
+    </LinearLayout>
 
     <!-- Access Location Button -->
     <Button
         android:id="@+id/btnAccessLocation"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
+        android:layout_width="220dp"
+        android:layout_height="52dp"
         android:text="Access Your Location"
         android:textColor="#FFFFFF"
-        android:layout_below="@id/imgMapIcon"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:letterSpacing="0.04"
+        android:layout_below="@id/iconCard"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:backgroundTint="@color/dark_blue"
-        android:layout_marginLeft="10dp"
-        android:textSize="17dp"
-        android:paddingStart="32dp"
-        android:paddingEnd="32dp"
-        />
+        android:backgroundTint="#0D3B66"
+        android:elevation="4dp"
+        android:paddingStart="28dp"
+        android:paddingEnd="28dp" />
 
-    <!-- Google Maps placeholder square -->
+    <!-- Map Placeholder with rounded corners -->
     <ImageView
         android:id="@+id/imgMapPlaceholder"
         android:layout_width="match_parent"
-        android:layout_height="410dp"
+        android:layout_height="370dp"
         android:layout_below="@id/btnAccessLocation"
-        android:layout_marginTop="24dp"
-        android:background="#E0E0E0"
+        android:layout_marginTop="22dp"
+        android:background="@drawable/bg_map_card"
         android:scaleType="centerCrop"
         android:src="@drawable/img_1"
         android:contentDescription="Map Placeholder"
+        android:elevation="4dp"
         android:clickable="true"
-        android:focusable="true"/>
+        android:focusable="true" />
 
     <!-- Info Text -->
     <TextView
@@ -66,10 +90,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Your current location will display here."
-        android:textSize="14sp"
-        android:textColor="#9E9E9E"
+        android:textSize="13sp"
+        android:textColor="#7BAFD4"
         android:layout_below="@id/imgMapPlaceholder"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginTop="14dp" />
 
 </RelativeLayout>

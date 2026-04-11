@@ -6,6 +6,7 @@ public class PlaceModel {
 
     String name;
     List<String> visits;
+    public boolean isFavourite = false;
 
     public PlaceModel(String name, List<String> visits) {
         this.name = name;
