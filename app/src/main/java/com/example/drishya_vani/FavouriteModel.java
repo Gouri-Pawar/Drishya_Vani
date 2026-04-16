@@ -27,7 +27,8 @@ public class FavouriteModel {
     public double getDistance() { return distance; }
 
     // universal key generator ⭐
-    public static String generateKey(String name,double lat,double lon){
-        return name;
+    public static String generateKey(String name,double lat,double lon)
+    {
+        return name.replace(" ","_") + "_" + lat + "_" + lon;
     }
 }

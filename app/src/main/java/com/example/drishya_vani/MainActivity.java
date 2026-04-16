@@ -59,12 +59,32 @@ public class MainActivity extends AppCompatActivity {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         FirebaseUser user = auth.getCurrentUser();
+
         if (user != null) {
-            db.collection("users").document(user.getUid()).get()
+            db.collection("users")
+                    .document(user.getUid())
+                    .get()
                     .addOnSuccessListener(doc -> {
-                        if (doc.exists())
-                            usernameText.setText("Hello, " + doc.getString("name"));
-                    });
+
+                        if (!doc.exists()) {
+                            usernameText.setText("Hello, User");
+                            return;
+                        }
+
+                        // Try multiple possible field names (temporary until you give DB structure)
+                        String name = doc.getString("name");
+
+                        if (name == null) name = doc.getString("username");
+                        if (name == null) name = doc.getString("fullName");
+                        if (name == null) name = doc.getString("userName");
+
+                        if (name == null || name.trim().isEmpty())
+                            name = "User";
+
+                        usernameText.setText("Hello, " + name);
+                    })
+                    .addOnFailureListener(e ->
+                            usernameText.setText("Hello, User"));
         }
 
         Animation logoAnimation = AnimationUtils.loadAnimation(this, R.anim.logo_animation);

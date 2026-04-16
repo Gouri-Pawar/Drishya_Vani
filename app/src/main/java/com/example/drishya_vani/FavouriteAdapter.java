@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
@@ -27,9 +29,11 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.View
         this.context = context;
         this.list    = list;
         this.db      = FirebaseFirestore.getInstance();
-        this.userId  = Settings.Secure.getString(
-                context.getContentResolver(),
-                Settings.Secure.ANDROID_ID);
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if(user != null){
+            userId = user.getUid();
+        }
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -64,8 +68,14 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.View
         // Emoji icon
         holder.emojiIcon.setText(getEmojiForType(place.getType()));
 
-        // Name
-        holder.placeName.setText(place.getName());
+        String cleanName = place.getName();
+
+    // If old data accidentally saved key as name → remove lat/lon part
+        if (cleanName != null && cleanName.contains("_")) {
+            cleanName = cleanName.split("_")[0];
+        }
+
+        holder.placeName.setText(cleanName);
 
         // Type pill — clean underscores, capitalise
         String typeLabel = place.getType();

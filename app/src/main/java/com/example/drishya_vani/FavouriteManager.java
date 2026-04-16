@@ -2,6 +2,9 @@ package com.example.drishya_vani;
 
 import android.content.Context;
 import android.provider.Settings;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,9 +16,11 @@ public class FavouriteManager {
 
     public FavouriteManager(Context context) {
         db = FirebaseFirestore.getInstance();
-        userId = Settings.Secure.getString(
-                context.getContentResolver(),
-                Settings.Secure.ANDROID_ID);
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if(user != null){
+            userId = user.getUid();
+        }
     }
 
     // ⭐ ADD FAVOURITE

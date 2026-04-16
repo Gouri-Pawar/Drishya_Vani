@@ -238,28 +238,57 @@ public class JourneyActivity extends AppCompatActivity {
             // ── 2. Unsplash image ─────────────────────────────────────────────
             String imageUrl = "";
             try {
-                // Fallback chain: "place city" → city → "India"
+
+                String booster = " landmark";
+
+                // detect common Indian area words to improve search
+                String lowerPlace = place != null ? place.toLowerCase() : "";
+
+                if (lowerPlace.contains("temple") || lowerPlace.contains("mandir"))
+                    booster = " temple";
+                else if (lowerPlace.contains("hospital"))
+                    booster = " hospital building";
+                else if (lowerPlace.contains("market") || lowerPlace.contains("bazaar"))
+                    booster = " street market";
+                else if (lowerPlace.contains("park") || lowerPlace.contains("garden"))
+                    booster = " park";
+                else if (lowerPlace.contains("fort"))
+                    booster = " fort";
+                else if (lowerPlace.contains("beach"))
+                    booster = " beach";
+
                 String[] searchQueries;
-                if (place != null && !place.isEmpty()) {
-                    searchQueries = new String[]{place + " " + city, city, "India"};
+
+                // Strongest → Weakest fallback chain
+                if (place != null && !place.isEmpty() && city != null && !city.isEmpty()) {
+                    searchQueries = new String[]{
+                            place + " " + city + booster,
+                            city + " famous place",
+                            city + " tourist attraction",
+                            "India tourist place"
+                    };
                 } else if (city != null && !city.isEmpty()) {
-                    searchQueries = new String[]{city, "India"};
+                    searchQueries = new String[]{
+                            city + " tourist attraction",
+                            "India tourist place"
+                    };
                 } else {
-                    searchQueries = new String[]{"India"};
+                    searchQueries = new String[]{"India tourist place"};
                 }
 
                 for (String searchQuery : searchQueries) {
-                    if (searchQuery == null || searchQuery.trim().isEmpty()) continue;
 
                     String unsplashUrl =
                             "https://api.unsplash.com/search/photos?query="
                                     + URLEncoder.encode(searchQuery.trim(), "UTF-8")
-                                    + "&orientation=landscape&per_page=3&order_by=relevant";
+                                    + "&orientation=landscape&per_page=5&order_by=relevant&content_filter=high";
 
                     HttpURLConnection imgConn =
                             (HttpURLConnection) new URL(unsplashUrl).openConnection();
+
                     imgConn.setRequestProperty("Authorization",
                             "Client-ID " + UNSPLASH_ACCESS_KEY);
+
                     imgConn.setConnectTimeout(5000);
                     imgConn.setReadTimeout(5000);
 
@@ -270,27 +299,29 @@ public class JourneyActivity extends AppCompatActivity {
                     String imgResponse = imgScanner.hasNext() ? imgScanner.next() : "";
                     imgScanner.close();
 
-                    JSONObject imgJson    = new JSONObject(imgResponse);
-                    JSONArray  results    = imgJson.getJSONArray("results");
+                    JSONObject imgJson = new JSONObject(imgResponse);
+                    JSONArray results = imgJson.getJSONArray("results");
 
                     if (results.length() > 0) {
-                        // Pick the most-liked photo from the top 3 for better quality
-                        int bestIndex = 0;
-                        int maxLikes  = -1;
-                        for (int i = 0; i < results.length(); i++) {
-                            int likes = results.getJSONObject(i).optInt("likes", 0);
-                            if (likes > maxLikes) {
-                                maxLikes  = likes;
-                                bestIndex = i;
-                            }
-                        }
-                        JSONObject photo = results.getJSONObject(bestIndex);
-                        if (photo.has("urls")) {
-                            imageUrl = photo.getJSONObject("urls")
-                                    .optString("regular", "");
-                        }
-                        if (!imageUrl.isEmpty()) break; // good image found — stop fallback
+                        JSONObject photo = results.getJSONObject(0);
+                        imageUrl = photo.getJSONObject("urls").optString("regular", "");
+                        if (!imageUrl.isEmpty()) break;
                     }
+                }
+                // 🔴 SPECIAL CASE : Vishnupuri default image
+                if (place != null && place.equalsIgnoreCase("Vishnupuri")) {
+
+                    runOnUiThread(() -> {
+                        txtDescription.setText(storyEnglish);
+
+                        Picasso.get()
+                                .load(R.drawable.vishnupuri)   // put vishnupuri.jpg in drawable
+                                .placeholder(R.drawable.landmark_placeholder)
+                                .error(R.drawable.landmark_placeholder)
+                                .into(imgLandmark);
+                    });
+
+                    return; // stop Unsplash fetch completely
                 }
 
             } catch (Exception e) {

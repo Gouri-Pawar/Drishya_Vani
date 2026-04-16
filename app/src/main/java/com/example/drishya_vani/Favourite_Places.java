@@ -67,8 +67,15 @@ public class Favourite_Places extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         db = FirebaseFirestore.getInstance();
-        userId = Settings.Secure.getString(
-                getContentResolver(), Settings.Secure.ANDROID_ID);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (user == null) {
+            Toast.makeText(this,"User not logged in",Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
+
+        userId = user.getUid();
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
@@ -115,9 +122,10 @@ public class Favourite_Places extends AppCompatActivity {
     // ── Step 2: Fetch from Firestore → populate fullList ─────────────────────
 
     private void fetchFavourites() {
-        db.collection("favourites")
+
+        db.collection("users")
                 .document(userId)
-                .collection("places")
+                .collection("favourite_places")   // ⭐ FIXED PATH
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
 
@@ -125,14 +133,14 @@ public class Favourite_Places extends AppCompatActivity {
 
                     for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
 
-                        String key  = doc.getString("key");
+                        String key  = doc.getId();          // ⭐ document id is the key
                         String name = doc.getString("name");
                         String type = doc.getString("type");
 
                         Double latObj = doc.getDouble("lat");
                         Double lonObj = doc.getDouble("lon");
 
-                        if (key == null || name == null) continue;
+                        if (name == null) continue;
 
                         double lat = latObj != null ? latObj : 0;
                         double lon = lonObj != null ? lonObj : 0;
@@ -152,12 +160,13 @@ public class Favourite_Places extends AppCompatActivity {
                                 (a, b) -> Double.compare(a.getDistance(), b.getDistance()));
                     }
 
-                    // Apply whatever is already typed in the search box
                     filterList(etSearch.getText().toString());
                 })
-                .addOnFailureListener(e ->
-                        Toast.makeText(this, "Failed to load favourites",
-                                Toast.LENGTH_SHORT).show());
+                .addOnFailureListener(e -> {
+                    Toast.makeText(this,
+                            "Firestore error: " + e.getMessage(),
+                            Toast.LENGTH_LONG).show();
+                });
     }
 
     // ── Step 3: Filter fullList → update favList shown in RecyclerView ────────

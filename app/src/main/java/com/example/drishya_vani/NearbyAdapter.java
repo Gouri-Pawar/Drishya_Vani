@@ -89,42 +89,31 @@ public class NearbyAdapter extends RecyclerView.Adapter<NearbyAdapter.ViewHolder
                                 : R.drawable.ic_heart_outline)
         );
 
-        // FIX BUG 1 + BUG 2: Toggle favourite on tap
         holder.heart.setOnClickListener(v -> {
+
             int pos = holder.getAdapterPosition();
             if (pos == RecyclerView.NO_POSITION) return;
 
-            favouriteManager.isFavourite(placeKey, isFav -> {
-                if (isFav) {
-                    // Already saved → REMOVE
-                    favouriteManager.removeFavourite(placeKey);
+            // STEP 1 — Toggle UI instantly (no waiting 🔥)
+            boolean currentlyFav =
+                    holder.heart.getDrawable().getConstantState() ==
+                            context.getDrawable(R.drawable.ic_heart_filled).getConstantState();
 
-                    // FIX BUG 2: Immediately update icon — was never done before
-                    holder.heart.setImageResource(R.drawable.ic_heart_outline);
-                    Toast.makeText(context, "Removed from favourites",
-                            Toast.LENGTH_SHORT).show();
-                } else {
-                    // Not saved → ADD
-                    // FIX BUG 1: Argument order was WRONG.
-                    // Old code: addFavourite(place.getKey(), place.getName(), ...)
-                    //           → place.getKey() = "PlaceName_lat_lon" was saved as `name`
-                    //           → that's why lat/lon appeared in the place name!
-                    // Fixed:    addFavourite(place.getName(), place.getType(), ...)
-                    //           → saves plain "PlaceName" as `name` in Firestore
-                    favouriteManager.addFavourite(
-                            place.getName(),   // ← plain name  e.g. "City Hospital"
-                            place.getType(),   // ← type        e.g. "hospital"
-                            place.getType(),   // ← placeType   (kept for compatibility)
-                            place.getLat(),
-                            place.getLon()
-                    );
-
-                    // FIX BUG 2: Immediately update icon — was never done before
-                    holder.heart.setImageResource(R.drawable.ic_heart_filled);
-                    Toast.makeText(context, "Added to favourites",
-                            Toast.LENGTH_SHORT).show();
-                }
-            });
+            if (currentlyFav) {
+                holder.heart.setImageResource(R.drawable.ic_heart_outline);
+                Toast.makeText(context, "Removed from favourites", Toast.LENGTH_SHORT).show();
+                favouriteManager.removeFavourite(placeKey);
+            } else {
+                holder.heart.setImageResource(R.drawable.ic_heart_filled);
+                Toast.makeText(context, "Added to favourites", Toast.LENGTH_SHORT).show();
+                favouriteManager.addFavourite(
+                        place.getName(),
+                        place.getType(),
+                        place.getType(),
+                        place.getLat(),
+                        place.getLon()
+                );
+            }
         });
     }
 
@@ -157,7 +146,7 @@ public class NearbyAdapter extends RecyclerView.Adapter<NearbyAdapter.ViewHolder
             case "information":                 return "ℹ️";
             case "hospital": case "clinic":     return "🏥";
             case "pharmacy":                    return "💊";
-            case "blood bank":                  return "🩸";
+            case "blood_bank": case "blood bank": return "🩸";
             case "doctors":                     return "👨‍⚕️";
             case "dentist":                     return "🦷";
             case "restaurant":                  return "🍽️";

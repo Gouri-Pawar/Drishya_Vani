@@ -1,234 +1,286 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@drawable/bg_add_contacts"
-    android:paddingStart="20dp"
-    android:paddingEnd="20dp"
-    android:paddingBottom="36dp">
+    android:fillViewport="true">
 
-    <!-- Header -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:layout_marginTop="52dp"
-        android:layout_marginBottom="32dp">
+        android:orientation="vertical"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="36dp">
 
+        <!-- Header -->
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="52dp"
+            android:layout_marginBottom="32dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Emergency Contacts"
+                    android:textSize="26sp"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:letterSpacing="0.02"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Quick dial your trusted people"
+                    android:textSize="13sp"
+                    android:textColor="#BBDEFB"
+                    android:layout_marginTop="4dp"/>
+            </LinearLayout>
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Emergency Contacts"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:text="📞"
                 android:textSize="26sp"
-                android:textStyle="bold"
-                android:textColor="#FFFFFF"
-                android:letterSpacing="0.02"/>
+                android:gravity="center"
+                android:background="@drawable/bg_icon_circle_white"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Quick dial your trusted people"
-                android:textSize="13sp"
-                android:textColor="#BBDEFB"
-                android:layout_marginTop="4dp"/>
         </LinearLayout>
 
-        <TextView
-            android:layout_width="52dp"
-            android:layout_height="52dp"
-            android:text="📞"
-            android:textSize="26sp"
-            android:gravity="center"
-            android:background="@drawable/bg_icon_circle_white"/>
+        <!-- Contact 1 Card -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/callMom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="14dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="8dp"
+            app:cardBackgroundColor="#FFFFFF">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp">
+
+                <TextView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:text="👩🏻"
+                    android:textSize="26sp"
+                    android:gravity="center"
+                    android:background="@drawable/bg_circle_lightblue"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginStart="16dp">
+
+                    <TextView
+                        android:id="@+id/txtContactName1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Contact 1"
+                        android:textSize="17sp"
+                        android:textStyle="bold"
+                        android:textColor="#1565C0"/>
+
+                    <!-- Phone number line -->
+                    <TextView
+                        android:id="@+id/txtContactPhone1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textSize="13sp"
+                        android:textColor="#546E7A"
+                        android:layout_marginTop="2dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tap to call immediately"
+                        android:textSize="12sp"
+                        android:textColor="#90A4AE"
+                        android:layout_marginTop="2dp"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="📲"
+                    android:textSize="22sp"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Contact 2 Card -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/callDad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="14dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="8dp"
+            app:cardBackgroundColor="#FFFFFF">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp">
+
+                <TextView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:text="👨🏻"
+                    android:textSize="26sp"
+                    android:gravity="center"
+                    android:background="@drawable/bg_circle_lightblue"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginStart="16dp">
+
+                    <TextView
+                        android:id="@+id/txtContactName2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Contact 2"
+                        android:textSize="17sp"
+                        android:textStyle="bold"
+                        android:textColor="#1565C0"/>
+
+                    <TextView
+                        android:id="@+id/txtContactPhone2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textSize="13sp"
+                        android:textColor="#546E7A"
+                        android:layout_marginTop="2dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tap to call immediately"
+                        android:textSize="12sp"
+                        android:textColor="#90A4AE"
+                        android:layout_marginTop="2dp"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="📲"
+                    android:textSize="22sp"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Contact 3 Card -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/callFriend"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="28dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="8dp"
+            app:cardBackgroundColor="#FFFFFF">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp">
+
+                <TextView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:text="👦🏻"
+                    android:textSize="26sp"
+                    android:gravity="center"
+                    android:background="@drawable/bg_circle_lightblue"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginStart="16dp">
+
+                    <TextView
+                        android:id="@+id/txtContactName3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Contact 3"
+                        android:textSize="17sp"
+                        android:textStyle="bold"
+                        android:textColor="#1565C0"/>
+
+                    <TextView
+                        android:id="@+id/txtContactPhone3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textSize="13sp"
+                        android:textColor="#546E7A"
+                        android:layout_marginTop="2dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tap to call immediately"
+                        android:textSize="12sp"
+                        android:textColor="#90A4AE"
+                        android:layout_marginTop="2dp"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="📲"
+                    android:textSize="22sp"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Edit Contacts Button -->
+        <Button
+            android:id="@+id/btnEditContacts"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="✏️  Edit Contacts"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textColor="#1565C0"
+            android:backgroundTint="#FFFFFF"
+            android:stateListAnimator="@null"
+            app:cornerRadius="16dp"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
 
     </LinearLayout>
-
-    <!-- Call Contact 1 -->
-    <androidx.cardview.widget.CardView
-        android:id="@+id/callMom"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_marginBottom="14dp"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="8dp"
-        app:cardBackgroundColor="#FFFFFF">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp">
-
-            <TextView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:text="👩"
-                android:textSize="26sp"
-                android:gravity="center"
-                android:background="@drawable/bg_circle_lightblue"/>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:layout_marginStart="16dp">
-
-                <!-- FIX: ID so Java setText() can find this view -->
-                <TextView
-                    android:id="@+id/txtContactName1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Contact 1"
-                    android:textSize="17sp"
-                    android:textStyle="bold"
-                    android:textColor="#1565C0"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Tap to call immediately"
-                    android:textSize="12sp"
-                    android:textColor="#90A4AE"
-                    android:layout_marginTop="2dp"/>
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="📲"
-                android:textSize="22sp"/>
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
-    <!-- Call Contact 2 -->
-    <androidx.cardview.widget.CardView
-        android:id="@+id/callDad"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_marginBottom="14dp"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="8dp"
-        app:cardBackgroundColor="#FFFFFF">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp">
-
-            <TextView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:text="👨"
-                android:textSize="26sp"
-                android:gravity="center"
-                android:background="@drawable/bg_circle_lightblue"/>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:layout_marginStart="16dp">
-
-                <!-- FIX: Unique ID for contact 2 -->
-                <TextView
-                    android:id="@+id/txtContactName2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Contact 2"
-                    android:textSize="17sp"
-                    android:textStyle="bold"
-                    android:textColor="#1565C0"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Tap to call immediately"
-                    android:textSize="12sp"
-                    android:textColor="#90A4AE"
-                    android:layout_marginTop="2dp"/>
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="📲"
-                android:textSize="22sp"/>
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
-    <!-- Call Contact 3 -->
-    <androidx.cardview.widget.CardView
-        android:id="@+id/callFriend"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="8dp"
-        app:cardBackgroundColor="#FFFFFF">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp">
-
-            <TextView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:text="🧑"
-                android:textSize="26sp"
-                android:gravity="center"
-                android:background="@drawable/bg_circle_lightblue"/>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:layout_marginStart="16dp">
-
-                <!-- FIX: Unique ID for contact 3 -->
-                <TextView
-                    android:id="@+id/txtContactName3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Contact 3"
-                    android:textSize="17sp"
-                    android:textStyle="bold"
-                    android:textColor="#1565C0"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Tap to call immediately"
-                    android:textSize="12sp"
-                    android:textColor="#90A4AE"
-                    android:layout_marginTop="2dp"/>
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="📲"
-                android:textSize="22sp"/>
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
-</LinearLayout>
+</ScrollView>

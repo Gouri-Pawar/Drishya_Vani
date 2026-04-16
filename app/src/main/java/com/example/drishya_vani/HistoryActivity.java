@@ -40,6 +40,8 @@ public class HistoryActivity extends AppCompatActivity {
 
     private void fetchPlaces() {
 
+        if (FirebaseAuth.getInstance().getCurrentUser() == null) return;
+
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         db.collection("users")
@@ -50,15 +52,29 @@ public class HistoryActivity extends AppCompatActivity {
 
                     placeList.clear();
 
+                    if (queryDocumentSnapshots.isEmpty()) {
+                        // No history yet
+                        placeList.add(new PlaceModel("No places visited yet", new ArrayList<>()));
+                        adapter.notifyDataSetChanged();
+                        return;
+                    }
+
                     for (DocumentSnapshot doc : queryDocumentSnapshots) {
 
                         String name = doc.getString("name");
+                        if (name == null) name = "Unknown Place";
 
                         List<String> visits = (List<String>) doc.get("visits");
+                        if (visits == null) visits = new ArrayList<>();
 
                         placeList.add(new PlaceModel(name, visits));
                     }
 
+                    adapter.notifyDataSetChanged();
+                })
+                .addOnFailureListener(e -> {
+                    placeList.clear();
+                    placeList.add(new PlaceModel("Failed to load history", new ArrayList<>()));
                     adapter.notifyDataSetChanged();
                 });
     }
