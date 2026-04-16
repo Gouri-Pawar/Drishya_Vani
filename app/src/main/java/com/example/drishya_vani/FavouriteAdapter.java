@@ -105,9 +105,9 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.View
         holder.imgRemove.setOnClickListener(v -> {
             String placeKey = place.getKey();
 
-            db.collection("favourites")
+            db.collection("users")
                     .document(userId)
-                    .collection("places")
+                    .collection("favourite_places")
                     .document(placeKey)
                     .delete()
                     .addOnSuccessListener(unused -> {
