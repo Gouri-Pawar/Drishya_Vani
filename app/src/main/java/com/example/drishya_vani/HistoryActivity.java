@@ -2,13 +2,14 @@ package com.example.drishya_vani;
 
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,34 +48,25 @@ public class HistoryActivity extends AppCompatActivity {
         db.collection("users")
                 .document(userId)
                 .collection("visited_places")
-                .get()
-                .addOnSuccessListener(queryDocumentSnapshots -> {
+                .addSnapshotListener((value, error) -> {
+
+                    if (error != null || value == null) return;
 
                     placeList.clear();
 
-                    if (queryDocumentSnapshots.isEmpty()) {
-                        // No history yet
-                        placeList.add(new PlaceModel("No places visited yet", new ArrayList<>()));
-                        adapter.notifyDataSetChanged();
-                        return;
-                    }
+                    for (QueryDocumentSnapshot doc : value) {
 
-                    for (DocumentSnapshot doc : queryDocumentSnapshots) {
+                        String placeName = doc.getString("placeName");
 
-                        String name = doc.getString("name");
-                        if (name == null) name = "Unknown Place";
+                        List<String> visits =
+                                (List<String>) doc.get("visits");
 
-                        List<String> visits = (List<String>) doc.get("visits");
+                        if (placeName == null) placeName = "Unknown Place";
                         if (visits == null) visits = new ArrayList<>();
 
-                        placeList.add(new PlaceModel(name, visits));
+                        placeList.add(new PlaceModel(placeName, visits));
                     }
 
-                    adapter.notifyDataSetChanged();
-                })
-                .addOnFailureListener(e -> {
-                    placeList.clear();
-                    placeList.add(new PlaceModel("Failed to load history", new ArrayList<>()));
                     adapter.notifyDataSetChanged();
                 });
     }

@@ -10,11 +10,11 @@ import android.location.Geocoder;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,6 +29,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.firebase.firestore.SetOptions;
 import com.google.mlkit.common.model.DownloadConditions;
 import com.google.mlkit.nl.translate.TranslateLanguage;
 import com.google.mlkit.nl.translate.Translator;
@@ -44,8 +45,6 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.List;
 import java.util.Locale;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Scanner;
 
 public class JourneyActivity extends AppCompatActivity {
@@ -63,15 +62,16 @@ public class JourneyActivity extends AppCompatActivity {
     FusedLocationProviderClient fusedLocationClient;
 
     String storyEnglish = "";
-    String storyHindi = "";
+    String storyHindi   = "";
     String storyMarathi = "";
 
-    // Unsplash Access Key
     String UNSPLASH_ACCESS_KEY = "HMmvQNEDOX94h3uO7YWMI0ycCZPWcv-nFqhMYtMSbZU";
 
     boolean isSpeaking = false;
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+    // ─── onCreate ────────────────────────────────────────────────────────────
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +89,7 @@ public class JourneyActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("AppSettings", MODE_PRIVATE);
         selectedLanguage = prefs.getString("language", "en");
 
-        // Text-to-Speech
+        // ── TTS setup ──────────────────────────────────────────────────────
         tts = new TextToSpeech(this, status -> {
             if (status == TextToSpeech.SUCCESS) {
                 Locale locale;
@@ -102,7 +102,7 @@ public class JourneyActivity extends AppCompatActivity {
             }
         });
 
-        // Translators
+        // ── Translators ────────────────────────────────────────────────────
         TranslatorOptions hindiOptions = new TranslatorOptions.Builder()
                 .setSourceLanguage(TranslateLanguage.ENGLISH)
                 .setTargetLanguage(TranslateLanguage.HINDI)
@@ -124,7 +124,7 @@ public class JourneyActivity extends AppCompatActivity {
         getUserLocation();
     }
 
-    // ─── Location ────────────────────────────────────────────────────────────────
+    // ─── Location ─────────────────────────────────────────────────────────────
 
     private void getUserLocation() {
         if (ActivityCompat.checkSelfPermission(this,
@@ -164,16 +164,38 @@ public class JourneyActivity extends AppCompatActivity {
                 try {
                     Geocoder geocoder = new Geocoder(this, Locale.getDefault());
                     List<Address> addresses = geocoder.getFromLocation(lat, lon, 1);
+
                     String place = "";
                     String city  = "";
 
                     if (addresses != null && !addresses.isEmpty()) {
                         Address address = addresses.get(0);
+
+                        // Try multiple address fields to get the best place name
                         place = address.getSubLocality();
-                        city  = address.getLocality();
-                        txtLandmarkName.setText(
-                                (place != null ? place : "") + ", " + (city != null ? city : ""));
+                        if (place == null || place.isEmpty())
+                            place = address.getLocality();
+                        if (place == null || place.isEmpty())
+                            place = address.getSubAdminArea();
+                        if (place == null || place.isEmpty())
+                            place = address.getAdminArea();
+
+                        // City fallback chain
+                        city = address.getLocality();
+                        if (city == null || city.isEmpty())
+                            city = address.getSubAdminArea();
+                        if (city == null || city.isEmpty())
+                            city = address.getAdminArea();
+
+                        String displayLabel =
+                                (place != null && !place.isEmpty() ? place : "") +
+                                        (city != null && !city.isEmpty() && !city.equals(place)
+                                                ? ", " + city : "");
+                        txtLandmarkName.setText(displayLabel);
+
+                        Log.d("Location", "place=" + place + " | city=" + city);
                     }
+
                     fetchPlaceInfo(place, lat, lon, city);
 
                 } catch (Exception e) {
@@ -187,12 +209,12 @@ public class JourneyActivity extends AppCompatActivity {
         });
     }
 
-    // ─── Fetch place info + image ─────────────────────────────────────────────
+    // ─── Fetch place info + image ──────────────────────────────────────────────
 
     private void fetchPlaceInfo(String place, double lat, double lon, String city) {
         new Thread(() -> {
 
-            // ── 1. Wikipedia description ─────────────────────────────────────
+            // ── 1. Wikipedia description ──────────────────────────────────
             String description = "";
             try {
                 String query = (place != null && !place.isEmpty()) ? place : city;
@@ -235,13 +257,10 @@ public class JourneyActivity extends AppCompatActivity {
 
             storyEnglish = description;
 
-            // ── 2. Unsplash image ─────────────────────────────────────────────
+            // ── 2. Unsplash image ─────────────────────────────────────────
             String imageUrl = "";
             try {
-
                 String booster = " landmark";
-
-                // detect common Indian area words to improve search
                 String lowerPlace = place != null ? place.toLowerCase() : "";
 
                 if (lowerPlace.contains("temple") || lowerPlace.contains("mandir"))
@@ -259,7 +278,6 @@ public class JourneyActivity extends AppCompatActivity {
 
                 String[] searchQueries;
 
-                // Strongest → Weakest fallback chain
                 if (place != null && !place.isEmpty() && city != null && !city.isEmpty()) {
                     searchQueries = new String[]{
                             place + " " + city + booster,
@@ -277,7 +295,6 @@ public class JourneyActivity extends AppCompatActivity {
                 }
 
                 for (String searchQuery : searchQueries) {
-
                     String unsplashUrl =
                             "https://api.unsplash.com/search/photos?query="
                                     + URLEncoder.encode(searchQuery.trim(), "UTF-8")
@@ -285,10 +302,8 @@ public class JourneyActivity extends AppCompatActivity {
 
                     HttpURLConnection imgConn =
                             (HttpURLConnection) new URL(unsplashUrl).openConnection();
-
                     imgConn.setRequestProperty("Authorization",
                             "Client-ID " + UNSPLASH_ACCESS_KEY);
-
                     imgConn.setConnectTimeout(5000);
                     imgConn.setReadTimeout(5000);
 
@@ -308,35 +323,42 @@ public class JourneyActivity extends AppCompatActivity {
                         if (!imageUrl.isEmpty()) break;
                     }
                 }
-                // 🔴 SPECIAL CASE : Vishnupuri default image
-                if (place != null && place.equalsIgnoreCase("Vishnupuri")) {
-
-                    runOnUiThread(() -> {
-                        txtDescription.setText(storyEnglish);
-
-                        Picasso.get()
-                                .load(R.drawable.vishnupuri)   // put vishnupuri.jpg in drawable
-                                .placeholder(R.drawable.landmark_placeholder)
-                                .error(R.drawable.landmark_placeholder)
-                                .into(imgLandmark);
-                    });
-
-                    return; // stop Unsplash fetch completely
-                }
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
-            // ── 3. Update UI on main thread ───────────────────────────────────
-            String finalDescription = description;
-            String finalImageUrl    = imageUrl;
-            String finalCity        = city;
+            // ── 3. Vishnupuri special case ────────────────────────────────
+            if (place != null && place.equalsIgnoreCase("Vishnupuri")) {
+                final String finalDesc = description;
+                final String finalCity = city;
+                final String finalPlace = place;
+
+                runOnUiThread(() -> {
+                    txtDescription.setText(finalDesc);
+                    // ✅ Fixed: save is called BEFORE the early return
+                    savePlaceToFirebase(finalPlace, finalCity);
+
+                    Picasso.get()
+                            .load(R.drawable.vishnupuri)
+                            .placeholder(R.drawable.landmark_placeholder)
+                            .error(R.drawable.landmark_placeholder)
+                            .into(imgLandmark);
+                });
+                return;
+            }
+
+            // ── 4. Update UI on main thread ───────────────────────────────
+            final String finalDescription = description;
+            final String finalImageUrl    = imageUrl;
+            final String finalCity        = city;
+            final String finalPlace       = place;   // ✅ Fixed: made final for lambda
 
             runOnUiThread(() -> {
                 txtDescription.setText(finalDescription);
 
-                savePlaceToFirebase(finalCity, finalDescription);
+                // ✅ Fixed: passing BOTH place and city
+                savePlaceToFirebase(finalPlace, finalCity);
 
                 Picasso.get()
                         .load(finalImageUrl.isEmpty() ? null : finalImageUrl)
@@ -365,29 +387,60 @@ public class JourneyActivity extends AppCompatActivity {
 
     // ─── Firebase ─────────────────────────────────────────────────────────────
 
-    private void savePlaceToFirebase(String city, String description) {
-        if (city == null || city.isEmpty()) return;
+    private void savePlaceToFirebase(String place, String city) {
+
+        // ✅ Fixed: build display name from both place + city with fallback chain
+        String displayName;
+        if (place != null && !place.isEmpty() && city != null && !city.isEmpty()
+                && !place.equals(city)) {
+            displayName = place + ", " + city;
+        } else if (city != null && !city.isEmpty()) {
+            displayName = city;
+        } else if (place != null && !place.isEmpty()) {
+            displayName = place;
+        } else {
+            Log.w("Firebase", "savePlaceToFirebase: both place and city null/empty — skipping");
+            return;
+        }
+
+        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+            Log.w("Firebase", "savePlaceToFirebase: user not logged in");
+            return;
+        }
 
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        String currentDate = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
-                .format(new Date());
+        String currentDate = new java.text.SimpleDateFormat(
+                "dd MMM yyyy", java.util.Locale.getDefault()
+        ).format(new java.util.Date());
 
-        DocumentReference docRef = db.collection("users")
+        // ✅ Fixed: safe document ID — no spaces, commas, or special characters
+        String docId = displayName.toLowerCase()
+                .replace(", ", "_")
+                .replace(",", "_")
+                .replace(" ", "_")
+                .replaceAll("[^a-z0-9_]", "")
+                .trim();
+
+        if (docId.isEmpty()) docId = "unknown_place";
+
+        Log.d("Firebase", "Saving → displayName: " + displayName
+                + " | docId: " + docId + " | date: " + currentDate);
+
+        Map<String, Object> data = new HashMap<>();
+        data.put("placeName", displayName);
+        data.put("visits", FieldValue.arrayUnion(currentDate));
+
+        db.collection("users")
                 .document(userId)
                 .collection("visited_places")
-                .document(city.toLowerCase());
-
-        docRef.get().addOnSuccessListener(documentSnapshot -> {
-            if (documentSnapshot.exists()) {
-                docRef.update("visits", FieldValue.arrayUnion(currentDate));
-            } else {
-                Map<String, Object> placeData = new HashMap<>();
-                placeData.put("name", city);
-                placeData.put("visits", Arrays.asList(currentDate));
-                docRef.set(placeData);
-            }
-        });
+                .document(docId)
+                .set(data, SetOptions.merge())
+                // ✅ Fixed: added success + failure listeners so errors are visible
+                .addOnSuccessListener(unused ->
+                        Log.d("Firebase", "Saved successfully: " + displayName))
+                .addOnFailureListener(e ->
+                        Log.e("Firebase", "Save FAILED for: " + displayName, e));
     }
 
     // ─── TTS ──────────────────────────────────────────────────────────────────

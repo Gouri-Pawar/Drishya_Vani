@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHolder> {
@@ -37,27 +36,29 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         PlaceModel place = placeList.get(position);
-
-        // 📍 Place Name
-        holder.placeName.setText("📍 " + place.getName());
+        holder.placeName.setText(place.getPlaceName());
 
         List<String> visits = place.getVisits();
 
         if (visits != null && !visits.isEmpty()) {
 
-            // Copy list to avoid modifying original
-            List<String> sortedVisits = new ArrayList<>(visits);
+            // Sort dates ascending
+            List<String> sorted = new ArrayList<>(visits);
+            java.text.SimpleDateFormat sdf =
+                    new java.text.SimpleDateFormat("dd MMM yyyy", java.util.Locale.getDefault());
+            sorted.sort((a, b) -> {
+                try {
+                    return sdf.parse(a).compareTo(sdf.parse(b));
+                } catch (Exception e) {
+                    return 0;
+                }
+            });
 
-            // Show latest first
-            Collections.reverse(sortedVisits);
-
-            StringBuilder visitText = new StringBuilder();
-
-            for (String date : sortedVisits) {
-                visitText.append("Visited on: ").append(date).append("\n");
+            StringBuilder sb = new StringBuilder();
+            for (String date : sorted) {
+                sb.append("• ").append(date).append("\n");
             }
-
-            holder.placeVisits.setText(visitText.toString().trim());
+            holder.placeVisits.setText(sb.toString().trim());
 
         } else {
             holder.placeVisits.setText("No visits yet");

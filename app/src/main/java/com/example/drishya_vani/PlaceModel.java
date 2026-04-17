@@ -4,17 +4,18 @@ import java.util.List;
 
 public class PlaceModel {
 
-    String name;
+    String placeName;
     List<String> visits;
-    public boolean isFavourite = false;
 
-    public PlaceModel(String name, List<String> visits) {
-        this.name = name;
+    public PlaceModel() {}
+
+    public PlaceModel(String placeName, List<String> visits) {
+        this.placeName = placeName;
         this.visits = visits;
     }
 
-    public String getName() {
-        return name;
+    public String getPlaceName() {
+        return placeName;
     }
 
     public List<String> getVisits() {
