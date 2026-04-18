@@ -122,7 +122,6 @@ public class MainActivity extends AppCompatActivity {
         if (!gps && !net) showModernLocationDialog(false);
     }
 
-    // ⭐ BEAUTIFUL POPUP
     private void showModernLocationDialog(boolean permissionMissing) {
 
         Dialog dialog = new Dialog(this);
@@ -131,17 +130,17 @@ public class MainActivity extends AppCompatActivity {
         dialog.setCancelable(false);
 
         TextView title = dialog.findViewById(R.id.dialogTitle);
-        TextView desc = dialog.findViewById(R.id.dialogDesc);
+        TextView message = dialog.findViewById(R.id.dialogMessage);
         Button allow = dialog.findViewById(R.id.btnAllow);
-        TextView cancel = dialog.findViewById(R.id.btnCancel);
+        Button cancel = dialog.findViewById(R.id.btnCancel);
 
         if (permissionMissing) {
             title.setText("Location Permission Needed 📍");
-            desc.setText("Allow location access for emergency safety features.");
+            message.setText("Allow location access for emergency safety features.");
             allow.setText("Allow Permission");
         } else {
             title.setText("Turn On Location 📍");
-            desc.setText("Please enable GPS to use safety features.");
+            message.setText("Please enable GPS to use safety features.");
             allow.setText("Turn On GPS");
         }
 
@@ -158,8 +157,9 @@ public class MainActivity extends AppCompatActivity {
         cancel.setOnClickListener(v -> dialog.dismiss());
 
         dialog.show();
-        // Apply animation to dialog root view
-        View dialogView = dialog.findViewById(android.R.id.content);
+
+        // Animate the root CardView
+        View dialogView = dialog.findViewById(R.id.dialogTitle).getRootView();
         Animation anim = AnimationUtils.loadAnimation(this, R.anim.popup_animation);
         dialogView.startAnimation(anim);
     }

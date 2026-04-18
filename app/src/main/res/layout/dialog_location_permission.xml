@@ -2,11 +2,11 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="28dp"
+    android:layout_margin="20dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="24dp"
-    app:cardElevation="20dp"
+    app:cardCornerRadius="28dp"
+    app:cardElevation="12dp"
     app:cardBackgroundColor="#FFFFFF">
 
     <LinearLayout
@@ -16,78 +16,128 @@
         android:gravity="center"
         android:padding="28dp">
 
-        <!-- Blue circle icon badge -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            app:cardCornerRadius="40dp"
-            app:cardElevation="8dp"
-            app:cardBackgroundColor="#E3F2FD"
-            android:layout_marginBottom="20dp">
+        <!-- Icon badge -->
+        <FrameLayout
+            android:layout_width="88dp"
+            android:layout_height="88dp"
+            android:layout_marginBottom="24dp"
+            android:layout_gravity="center_horizontal">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="📍"
-                android:textSize="36sp"
-                android:gravity="center"/>
-        </androidx.cardview.widget.CardView>
+            <!-- Outer soft ring -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="88dp"
+                android:layout_height="88dp"
+                app:cardCornerRadius="44dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="#E8EEF8">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Inner blue circle -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_gravity="center"
+                app:cardCornerRadius="32dp"
+                app:cardElevation="4dp"
+                app:cardBackgroundColor="#3B82F6">
+
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_map_location"
+                    android:tint="#FFFFFF"/>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Green check badge -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="top|end"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="2dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp"
+                app:cardBackgroundColor="#22C55E">
+
+                <ImageView
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_check"
+                    android:tint="#FFFFFF"/>
+            </androidx.cardview.widget.CardView>
+
+        </FrameLayout>
 
         <!-- Title -->
         <TextView
             android:id="@+id/dialogTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Enable Location"
+            android:text="Ready to explore? 🌍"
             android:textSize="22sp"
             android:textStyle="bold"
-            android:textColor="#1565C0"
+            android:textColor="#111827"
             android:gravity="center"
             android:layout_marginBottom="10dp"/>
 
-        <!-- Description -->
+        <!-- Message -->
         <TextView
-            android:id="@+id/dialogDesc"
+            android:id="@+id/dialogMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="We need your location to provide emergency help and show nearby places accurately."
+            android:text="Switch on location and let DrishyaVani show you what\'s around!"
             android:textAlignment="center"
-            android:textColor="#546E7A"
+            android:textColor="#6B7280"
             android:textSize="14sp"
-            android:lineSpacingMultiplier="1.4"
-            android:layout_marginBottom="24dp"/>
+            android:lineSpacingMultiplier="1.6"
+            android:layout_marginBottom="20dp"/>
 
-        <!-- Continue Button -->
+        <!-- Allow Location button -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="52dp"
             app:cardCornerRadius="14dp"
-            app:cardElevation="6dp"
-            app:cardBackgroundColor="#1565C0"
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="#3B82F6"
             android:layout_marginBottom="12dp">
 
             <Button
                 android:id="@+id/btnAllow"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="📍  Allow Location"
+                android:text="Allow location"
                 android:textColor="#FFFFFF"
                 android:textSize="15sp"
                 android:textStyle="bold"
-                android:background="@null"
+                android:background="@android:color/transparent"
                 android:stateListAnimator="@null"/>
         </androidx.cardview.widget.CardView>
 
-        <!-- Not Now -->
-        <TextView
-            android:id="@+id/btnCancel"
+        <!-- Not Now button -->
+        <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Not Now"
-            android:textColor="#90A4AE"
-            android:textSize="14sp"
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp"/>
+            android:layout_height="44dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="#F3F4F6">
+
+            <Button
+                android:id="@+id/btnCancel"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Not now"
+                android:textColor="#374151"
+                android:textSize="13sp"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"
+                android:background="@android:color/transparent"
+                android:stateListAnimator="@null"/>
+        </androidx.cardview.widget.CardView>
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>
