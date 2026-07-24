@@ -52,26 +52,26 @@ DrishyaVani addresses this with a single Android app that speaks location contex
 ## App Modules / Activities
 
 - **Main Activity** — current location, quick access to visited places, emergency contacts, language selection, etc.
-- <img width="738" height="1600" alt="WhatsApp Image 2026-07-24 at 3 38 22 PM" src="https://github.com/user-attachments/assets/4be52174-6fc5-40bd-bc33-e2e5b09b2140" />
+- <img width="300" height="650" alt="WhatsApp Image 2026-07-24 at 3 38 22 PM" src="https://github.com/user-attachments/assets/4be52174-6fc5-40bd-bc33-e2e5b09b2140" />
 
 - **Select Language Activity** — choose preferred language; translates place info via ML Kit
-- <img width="738" height="1600" alt="WhatsApp Image 2026-07-24 at 3 38 24 PM" src="https://github.com/user-attachments/assets/e5579c13-a674-44ea-ae0b-5adf1fab4890" />
+- <img width="300" height="650" alt="WhatsApp Image 2026-07-24 at 3 38 24 PM" src="https://github.com/user-attachments/assets/e5579c13-a674-44ea-ae0b-5adf1fab4890" />
 
 - **Travel History Activity** — list of visited places with dates (from Firestore)
-- <img width="738" height="1600" alt="WhatsApp Image 2026-07-24 at 3 38 25 PM" src="https://github.com/user-attachments/assets/0c11bb91-b6ae-420c-b747-d3e53f7689b9" />
+- <img width="300" height="650" alt="WhatsApp Image 2026-07-24 at 3 38 25 PM" src="https://github.com/user-attachments/assets/0c11bb91-b6ae-420c-b747-d3e53f7689b9" />
 
 - **Nearby Places Activity** — nearby locations via Overpass API; add to favourites
-<img width="738" height="1600" alt="WhatsApp Image 2026-07-24 at 3 38 25 PM (1)" src="https://github.com/user-attachments/assets/643a201f-f77c-4055-bd9c-1c899616dd75" />
+<img width="300" height="650" alt="WhatsApp Image 2026-07-24 at 3 38 25 PM (1)" src="https://github.com/user-attachments/assets/643a201f-f77c-4055-bd9c-1c899616dd75" />
 
 
 - **Favourite Places Activity** — saved favourite places with name, distance, and type
-- <img width="738" height="1600" alt="WhatsApp Image 2026-07-24 at 3 38 26 PM" src="https://github.com/user-attachments/assets/82e4e53d-1919-4621-a000-2d1e71b513af" />
+- <img width="300" height="650" alt="WhatsApp Image 2026-07-24 at 3 38 26 PM" src="https://github.com/user-attachments/assets/82e4e53d-1919-4621-a000-2d1e71b513af" />
 
 - **Map Activity** — current location and nearby places on Google Maps
-- <img width="738" height="1600" alt="WhatsApp Image 2026-07-24 at 3 38 23 PM (1)" src="https://github.com/user-attachments/assets/71d0f239-c969-4e5b-a3ac-b0be5c73c27f" />
+- <img width="300" height="650" alt="WhatsApp Image 2026-07-24 at 3 38 23 PM (1)" src="https://github.com/user-attachments/assets/71d0f239-c969-4e5b-a3ac-b0be5c73c27f" />
 
 - **Emergency Activity** — dial police/ambulance/SOS, share live location, manage & call emergency contacts
-- <img width="738" height="1600" alt="WhatsApp Image 2026-07-24 at 3 38 27 PM" src="https://github.com/user-attachments/assets/aa5f0ad3-ec5b-418c-adf1-85031f6ffc96" />
+- <img width="300" height="650" alt="WhatsApp Image 2026-07-24 at 3 38 27 PM" src="https://github.com/user-attachments/assets/aa5f0ad3-ec5b-418c-adf1-85031f6ffc96" />
 
 
 ## Advantages
@@ -81,7 +81,3 @@ DrishyaVani addresses this with a single Android app that speaks location contex
 - Real-time location info combined with historical/cultural context
 - Everything — navigation, information, and safety — in one app
 - Tracks visited and favourite places over time
-
-
-**Gouri Pawar**
-Department of Computer Science & Engineering
