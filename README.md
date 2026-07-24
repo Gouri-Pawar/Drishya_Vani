@@ -51,16 +51,26 @@ DrishyaVani addresses this with a single Android app that speaks location contex
 
 ## App Modules / Activities
 
-- **Main Activity** , **Select Language Activity** **And** **Travel History Activity**
-- <img width="250" height="600" alt="WhatsApp Image 2026-07-24 at 3 38 22 PM" src="https://github.com/user-attachments/assets/4be52174-6fc5-40bd-bc33-e2e5b09b2140" />     <img width="250" height="600" alt="WhatsApp Image 2026-07-24 at 3 38 24 PM" src="https://github.com/user-attachments/assets/e5579c13-a674-44ea-ae0b-5adf1fab4890" />     <img width="250" height="600" alt="WhatsApp Image 2026-07-24 at 3 38 25 PM" src="https://github.com/user-attachments/assets/0c11bb91-b6ae-420c-b747-d3e53f7689b9" />
+-## App Modules / Activities
 
-**Nearby Places Activity** ,  **Favourite Places Activity** **And** **Map Activity**
-<img width="250" height="600" alt="WhatsApp Image 2026-07-24 at 3 38 25 PM (1)" src="https://github.com/user-attachments/assets/643a201f-f77c-4055-bd9c-1c899616dd75" />    <img width="250" height="600" alt="WhatsApp Image 2026-07-24 at 3 38 26 PM" src="https://github.com/user-attachments/assets/82e4e53d-1919-4621-a000-2d1e71b513af" />    <img width="300" height="650" alt="WhatsApp Image 2026-07-24 at 3 38 23 PM (1)" src="https://github.com/user-attachments/assets/71d0f239-c969-4e5b-a3ac-b0be5c73c27f" />
+**Main Activity, Select Language Activity & Travel History Activity**
+<p float="left">
+<img width="250" alt="Main Activity" src="https://github.com/user-attachments/assets/4be52174-6fc5-40bd-bc33-e2e5b09b2140" />
+<img width="250" alt="Select Language Activity" src="https://github.com/user-attachments/assets/e5579c13-a674-44ea-ae0b-5adf1fab4890" />
+<img width="250" alt="Travel History Activity" src="https://github.com/user-attachments/assets/0c11bb91-b6ae-420c-b747-d3e53f7689b9" />
+</p>
+
+**Nearby Places Activity, Favourite Places Activity & Map Activity**
+<p float="left">
+<img width="250" alt="Nearby Places Activity" src="https://github.com/user-attachments/assets/643a201f-f77c-4055-bd9c-1c899616dd75" />
+<img width="250" alt="Favourite Places Activity" src="https://github.com/user-attachments/assets/82e4e53d-1919-4621-a000-2d1e71b513af" />
+<img width="250" alt="Map Activity" src="https://github.com/user-attachments/assets/71d0f239-c969-4e5b-a3ac-b0be5c73c27f" />
+</p>
 
 **Emergency Activity**
-<img width="300" height="650" alt="WhatsApp Image 2026-07-24 at 3 38 27 PM" src="https://github.com/user-attachments/assets/aa5f0ad3-ec5b-418c-adf1-85031f6ffc96" />
-
-
+<p float="left">
+<img width="250" alt="Emergency Activity" src="https://github.com/user-attachments/assets/aa5f0ad3-ec5b-418c-adf1-85031f6ffc96" />
+</p>
 ## Advantages
 
 - Simple, voice-based navigation and guidance
