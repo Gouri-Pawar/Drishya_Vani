@@ -51,26 +51,25 @@ DrishyaVani addresses this with a single Android app that speaks location contex
 
 ## App Modules / Activities
 
--## App Modules / Activities
-
 **Main Activity, Select Language Activity & Travel History Activity**
 <p float="left">
-<img width="250" alt="Main Activity" src="https://github.com/user-attachments/assets/4be52174-6fc5-40bd-bc33-e2e5b09b2140" /> &nbsp;&nbsp;&nbsp;
-<img width="250" alt="Select Language Activity" src="https://github.com/user-attachments/assets/e5579c13-a674-44ea-ae0b-5adf1fab4890" /> &nbsp;&nbsp;&nbsp;
-<img width="250" alt="Travel History Activity" src="https://github.com/user-attachments/assets/0c11bb91-b6ae-420c-b747-d3e53f7689b9" />
-</p>
+<img width="200" alt="Main Activity" src="https://github.com/user-attachments/assets/4be52174-6fc5-40bd-bc33-e2e5b09b2140" /> &nbsp;&nbsp;&nbsp;
+<img width="200" alt="Select Language Activity" src="https://github.com/user-attachments/assets/e5579c13-a674-44ea-ae0b-5adf1fab4890" /> &nbsp;&nbsp;&nbsp;
+<img width="200" alt="Travel History Activity" src="https://github.com/user-attachments/assets/0c11bb91-b6ae-420c-b747-d3e53f7689b9" />
+</p> <br>
 
-**Nearby Places Activity, Favourite Places Activity & Map Activity**
+**Nearby Places Activity, Favourite Places Activity & Map Activity** <br>
 <p float="left">
-<img width="250" alt="Nearby Places Activity" src="https://github.com/user-attachments/assets/643a201f-f77c-4055-bd9c-1c899616dd75" />&nbsp;&nbsp;&nbsp;
-<img width="250" alt="Favourite Places Activity" src="https://github.com/user-attachments/assets/82e4e53d-1919-4621-a000-2d1e71b513af" />&nbsp;&nbsp;&nbsp;
-<img width="250" alt="Map Activity" src="https://github.com/user-attachments/assets/71d0f239-c969-4e5b-a3ac-b0be5c73c27f" />
-</p>
+<img width="200" alt="Nearby Places Activity" src="https://github.com/user-attachments/assets/643a201f-f77c-4055-bd9c-1c899616dd75" />&nbsp;&nbsp;&nbsp;
+<img width="200" alt="Favourite Places Activity" src="https://github.com/user-attachments/assets/82e4e53d-1919-4621-a000-2d1e71b513af" />&nbsp;&nbsp;&nbsp;
+<img width="200" alt="Map Activity" src="https://github.com/user-attachments/assets/71d0f239-c969-4e5b-a3ac-b0be5c73c27f" />
+</p> <br>
 
-**Emergency Activity**
+**Emergency Activity** <br>
 <p float="left">
-<img width="250" alt="Emergency Activity" src="https://github.com/user-attachments/assets/aa5f0ad3-ec5b-418c-adf1-85031f6ffc96" />
-</p>
+<img width="200" alt="Emergency Activity" src="https://github.com/user-attachments/assets/aa5f0ad3-ec5b-418c-adf1-85031f6ffc96" />
+</p> 
+
 ## Advantages
 
 - Simple, voice-based navigation and guidance
