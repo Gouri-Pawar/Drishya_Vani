@@ -51,14 +51,8 @@ DrishyaVani addresses this with a single Android app that speaks location contex
 
 ## App Modules / Activities
 
-- **Main Activity** — current location, quick access to visited places, emergency contacts, language selection, etc.
-- <img width="300" height="650" alt="WhatsApp Image 2026-07-24 at 3 38 22 PM" src="https://github.com/user-attachments/assets/4be52174-6fc5-40bd-bc33-e2e5b09b2140" />
-
-- **Select Language Activity** — choose preferred language; translates place info via ML Kit
-- <img width="300" height="650" alt="WhatsApp Image 2026-07-24 at 3 38 24 PM" src="https://github.com/user-attachments/assets/e5579c13-a674-44ea-ae0b-5adf1fab4890" />
-
-- **Travel History Activity** — list of visited places with dates (from Firestore)
-- <img width="300" height="650" alt="WhatsApp Image 2026-07-24 at 3 38 25 PM" src="https://github.com/user-attachments/assets/0c11bb91-b6ae-420c-b747-d3e53f7689b9" />
+- **Main Activity**, **Select Language Activity**, **Travel History Activity**
+- <img width="300" height="650" alt="WhatsApp Image 2026-07-24 at 3 38 22 PM" src="https://github.com/user-attachments/assets/4be52174-6fc5-40bd-bc33-e2e5b09b2140" /> <img width="300" height="650" alt="WhatsApp Image 2026-07-24 at 3 38 24 PM" src="https://github.com/user-attachments/assets/e5579c13-a674-44ea-ae0b-5adf1fab4890" /> <img width="300" height="650" alt="WhatsApp Image 2026-07-24 at 3 38 25 PM" src="https://github.com/user-attachments/assets/0c11bb91-b6ae-420c-b747-d3e53f7689b9" />
 
 - **Nearby Places Activity** — nearby locations via Overpass API; add to favourites
 <img width="300" height="650" alt="WhatsApp Image 2026-07-24 at 3 38 25 PM (1)" src="https://github.com/user-attachments/assets/643a201f-f77c-4055-bd9c-1c899616dd75" />
